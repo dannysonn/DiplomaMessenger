@@ -1,0 +1,24 @@
+{
+  "name": "graduation_messenger",
+  "version": "1.0.0",
+  "description": "This is my graduation project, it is a corporate messenger developed using modern frontend technologies",
+  "private": true,
+  "keywords": [
+    "modern frontend technologies",
+    "messenger"
+  ],
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "Danila Kryuchkov",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "csv-loader": "^3.0.5",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "xml-loader": "^1.2.1"
+  }
+}
