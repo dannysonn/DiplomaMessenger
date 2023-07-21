@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env) => {
     // Use env.<YOUR VARIABLE> here:
@@ -23,8 +24,8 @@ module.exports = (env) => {
     let config = {
         context: path.resolve(__dirname, 'src'),
         entry: {
-            index: './index.js',
-            print: './print.js'
+            index: './index.tsx',
+            print: './print.ts'
         },
         devServer: {
             static: {
@@ -37,6 +38,7 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: './index.html'
             }),
+            new ESLintPlugin()
         ],
         output: {
             filename: '[name].[contenthash].js',
