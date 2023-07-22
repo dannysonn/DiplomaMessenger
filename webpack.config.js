@@ -45,6 +45,9 @@ module.exports = (env) => {
             path: path.resolve(__dirname, 'dist'),
             clean: true,
         },
+        resolve: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx']
+        },
         optimization: {
             splitChunks: {
                 chunks: 'all'
@@ -79,7 +82,7 @@ module.exports = (env) => {
                     }
                 },
                 {
-                    test: /\.m?ts$/,
+                    test: /\.m?(ts|tsx)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: "babel-loader",
