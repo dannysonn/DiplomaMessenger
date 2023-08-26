@@ -1,0 +1,17 @@
+.Login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(135deg, rgba(78, 200, 90, 0.00) 0%, #4EC85A 0.01%, #8FB4FB 99.99%, #72A2FF 100%);
+    background-size: cover;
+}
+
+.Login__container {
+    max-width: 341px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.14);
+}
