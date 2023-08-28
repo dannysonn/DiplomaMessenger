@@ -1,0 +1,63 @@
+.Login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(135deg, rgba(78, 200, 90, 0.00) 0%, #4EC85A 0.01%, #8FB4FB 99.99%, #72A2FF 100%);
+    background-size: cover;
+}
+
+.Login__container {
+    padding: 50px 30px 30px;
+    max-width: 341px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.14);
+}
+
+.Login_form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Login_form__title {
+    color: #1E1E1E;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.Login_form__btn {
+    margin-top: 159px;
+    padding: 12px 70px;
+
+    background: #3369F3;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13px;
+}
+
+
+.Login__registration_link {
+    margin-top: 14px;
+
+    text-align: center;
+    color: #3369F3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 11px;
+}
+
+input ~ .Input__effect {
+
+}
