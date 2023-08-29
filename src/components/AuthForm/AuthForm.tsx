@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./AuthForm.css";
-import {Link} from 'react-router-dom';
 
 interface AuthFormProps {
   title: string;
@@ -20,7 +20,9 @@ function AuthForm({ title, AuthInputs, btnText, linkText }: AuthFormProps) {
         <button type="button" className={styles.Auth_form__btn}>
           {btnText}
         </button>
-        <Link to="/registration" className={styles.Auth__registration_link}>{linkText}</Link>
+        <Link to="/registration" className={styles.Auth__registration_link}>
+          {linkText}
+        </Link>
       </form>
     </div>
   );
