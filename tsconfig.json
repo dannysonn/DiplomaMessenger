@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": "src/",
     "paths": {
       "*": ["./src/*"]
     },
@@ -13,6 +13,6 @@
     "skipLibCheck": true,
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src/"],
   "exclude": ["node_modules", "dist"]
 }

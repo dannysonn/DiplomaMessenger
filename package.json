@@ -12,7 +12,7 @@
     "dev": "webpack --env development",
     "watch": "webpack --watch",
     "start": "webpack serve --open --env development",
-    "lint": "eslint src",
+    "lint": "eslint src --fix",
     "prepare": "husky install"
   },
   "author": "Danila Kryuchkov",
@@ -59,6 +59,7 @@
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
   }
 }

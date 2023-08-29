@@ -1,0 +1,36 @@
+.Auth_input__label:last-of-type {
+    margin-bottom: 0;
+}
+
+.Auth_input__label {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 16px;
+
+    color: #999;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 9px;
+}
+
+.Auth_input__label .Auth_input__label_text {
+    margin-bottom: 7px;
+}
+
+.Auth_input {
+    padding: 0 0 7px 0;
+
+    border-bottom: 1px solid #999;
+
+    color: #1E1E1E;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13px; /* 92.857% */
+}
+
+.Auth_input:hover {
+    border-bottom: 1px solid #3369F3;
+}
