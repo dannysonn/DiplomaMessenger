@@ -1,34 +1,32 @@
 import React from "react";
 import AuthInput from "../../components/AuthInput/AuthInput";
-import styles from "./Login.module.css";
+import styles from "../../App.css";
+import AuthForm from "../../components/AuthForm/AuthForm";
+
+const AuthInputs = [
+  <AuthInput
+    id="login"
+    placeholder="programmer2000"
+    labelText="Login"
+    type="text"
+  />,
+  <AuthInput
+    id="password"
+    placeholder="********"
+    labelText="Password"
+    type="text"
+  />,
+];
 
 function Login() {
   return (
-    <main className={styles.Login}>
-      <div className={styles.Login__container}>
-        <form className={styles.Login_form}>
-          <h1 className={styles.Login_form__title}>Login</h1>
-          <AuthInput
-            id="login"
-            placeholder="programmer2000"
-            labelText="Login"
-            type="text"
-          />
-
-          <AuthInput
-            id="password"
-            placeholder="********"
-            labelText="Password"
-            type="text"
-          />
-          <button type="button" className={styles.Login_form__btn}>
-            Log in
-          </button>
-          <a href="#" className={styles.Login__registration_link}>
-            No account?
-          </a>
-        </form>
-      </div>
+    <main className={styles.Auth}>
+      <AuthForm
+        title="Login"
+        AuthInputs={AuthInputs}
+        btnText="Log in"
+        linkText="No account?"
+      />
     </main>
   );
 }
