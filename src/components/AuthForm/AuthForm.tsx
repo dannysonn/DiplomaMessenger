@@ -7,9 +7,16 @@ interface AuthFormProps {
   AuthInputs: React.JSX.Element[];
   btnText: string;
   linkText: string;
+  linkUrl: string;
 }
 
-function AuthForm({ title, AuthInputs, btnText, linkText }: AuthFormProps) {
+function AuthForm({
+  title,
+  AuthInputs,
+  btnText,
+  linkText,
+  linkUrl,
+}: AuthFormProps) {
   return (
     <div className={styles.Auth__container}>
       <form className={styles.Auth_form}>
@@ -20,7 +27,7 @@ function AuthForm({ title, AuthInputs, btnText, linkText }: AuthFormProps) {
         <button type="button" className={styles.Auth_form__btn}>
           {btnText}
         </button>
-        <Link to="/registration" className={styles.Auth__registration_link}>
+        <Link to={linkUrl} className={styles.Auth__registration_link}>
           {linkText}
         </Link>
       </form>
