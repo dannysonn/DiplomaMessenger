@@ -26,6 +26,7 @@ function Login() {
         AuthInputs={AuthInputs}
         btnText="Log in"
         linkText="No account?"
+        linkUrl="/registration"
       />
     </main>
   );

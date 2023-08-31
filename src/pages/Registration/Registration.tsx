@@ -46,6 +46,7 @@ function Registration() {
         AuthInputs={AuthInputs}
         btnText="Register"
         linkText="Sign in"
+        linkUrl="/"
       />
     </main>
   );

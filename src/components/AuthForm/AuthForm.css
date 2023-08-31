@@ -2,8 +2,8 @@
     padding: 50px 30px 30px;
     max-width: 341px;
     width: 100%;
-    background: #FFFFFF;
-    box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, 0.14);
+    background: #FFF;
+    box-shadow: 5px 5px 6px 0 rgb(0 0 0 / 14%);
 }
 
 .Auth_form {
@@ -14,7 +14,6 @@
 
 .Auth_form__title {
     margin-bottom: 40px;
-
     color: #1E1E1E;
     text-align: center;
     font-size: 20px;
@@ -26,9 +25,7 @@
 .Auth_form__btn {
     margin-top: 159px;
     padding: 12px 70px;
-
     background: #3369F3;
-
     cursor: pointer;
     color: #FFF;
     text-align: center;
@@ -42,14 +39,8 @@
     transform: scale(1.01);
 }
 
-.Auth__registration_link:hover {
-    transform: scale(1.03);
-    text-decoration: underline;
-}
-
 .Auth__registration_link {
     margin-top: 14px;
-
     text-align: center;
     color: #3369F3;
     font-size: 14px;
@@ -58,6 +49,7 @@
     line-height: 11px;
 }
 
-input ~ .Input__effect {
-
+.Auth__registration_link:hover {
+    transform: scale(1.03);
+    text-decoration: underline;
 }
