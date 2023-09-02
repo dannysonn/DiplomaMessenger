@@ -4,6 +4,7 @@
     width: 100%;
     background: #FFF;
     box-shadow: 5px 5px 6px 0 rgb(0 0 0 / 14%);
+    border-radius: 30px;
 }
 
 .Auth_form {
@@ -33,6 +34,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 13px;
+    border-radius: 30px;
 }
 
 .Auth_form__btn:hover {

@@ -30,3 +30,7 @@
 .Auth_input:hover {
     border-bottom: 1px solid #3369F3;
 }
+
+.Auth_input:focus {
+    border-bottom: 1px solid #3369F3;
+}
