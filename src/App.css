@@ -24,7 +24,7 @@ a {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(135deg, rgb(78 200 90 / 0%) 0%, #4EC85A 0.01%, #8FB4FB 99.99%, #72A2FF 100%);
+    background: linear-gradient(180deg, #72A2FF 0.33%, #314366 99.72%);
     background-size: cover;
 }
 
