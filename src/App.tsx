@@ -5,12 +5,14 @@ import Login from "./pages/Login/Login";
 import "normalize.css";
 import "./App.css";
 import Registration from "./pages/Registration/Registration";
+import Chats from "./pages/Chats/Chats";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/registration" element={<Registration />} />
+      <Route path="/" element={<Chats />} />
     </Routes>
   );
 }

@@ -1,0 +1,15 @@
+.Chats {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Chats__container {
+    max-width: 1440px;
+    width: 100%;
+    border-radius: 30px;
+    background: #FFF;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 25%);
+}
