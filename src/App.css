@@ -1,6 +1,10 @@
 body {
     font-family: Inter, sans-serif;
     box-sizing: content-box;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #72A2FF 0.33%, #314366 99.72%);
+    background-size: cover;
 }
 
 input {
