@@ -1,0 +1,62 @@
+.Chat {
+    display: flex;
+}
+
+.Chat:hover {
+    border-radius: 100px;
+    background: #476CFF;
+}
+
+.Chat_active {
+    border-radius: 100px;
+    background: #476CFF;
+}
+
+.Chat__avatar {
+    width: 75px;
+    height: 75px;
+    align-self: center;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
+.Chat__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Chat__title {
+    margin: 10px 0 0;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Chat__message {
+    margin: 0 0 10px;
+    color: #696969;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Chat:hover .Chat__title {
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Chat:hover .Chat__message {
+    color: #fff;
+    opacity: .45;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
