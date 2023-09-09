@@ -7,13 +7,13 @@
     border-radius: 30px;
 }
 
-.Auth_form {
+.Auth-form {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.Auth_form__title {
+.Auth-form__title {
     margin-bottom: 40px;
     color: #1E1E1E;
     text-align: center;
@@ -23,7 +23,7 @@
     line-height: 20px;
 }
 
-.Auth_form__btn {
+.Auth-form__btn {
     margin-top: 159px;
     padding: 12px 70px;
     background: #3369F3;
@@ -37,11 +37,11 @@
     border-radius: 30px;
 }
 
-.Auth_form__btn:hover {
+.Auth-form__btn:hover {
     transform: scale(1.01);
 }
 
-.Auth__registration_link {
+.Auth__registration-link {
     margin-top: 14px;
     text-align: center;
     color: #3369F3;
@@ -51,7 +51,7 @@
     line-height: 11px;
 }
 
-.Auth__registration_link:hover {
+.Auth__registration-link:hover {
     transform: scale(1.03);
     text-decoration: underline;
 }
