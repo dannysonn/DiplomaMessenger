@@ -1,5 +1,6 @@
 .Chat {
     display: flex;
+    margin-right: 10px;
 }
 
 .Chat:hover {

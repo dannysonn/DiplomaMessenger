@@ -19,19 +19,27 @@ function Chats() {
             </form>
           </header>
           <form action="" className="Chats-sidebar__search">
-            <Input
-              inputClass={styles.Chats_sidebar__search_input}
-              type="text"
-              id="search-input"
-              placeholder="Search chat"
-            />
+            <div className={styles.Chats_sidebar__search_input_container}>
+              <Input
+                inputClass={styles.Chats_sidebar__search_input}
+                type="text"
+                id="search-input"
+                placeholder="Search chat"
+              />
+            </div>
           </form>
           <div className={styles.Chats_sidebar__wrapper}>
             <Chat />
             <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
           </div>
 
-          <footer className="Chats-sidebar__footer">
+          <footer className={styles.Chats_sidebar__footer}>
             <a href="/profile" className="Chats-sidebar__profile-link">
               <img src="" alt="" />
             </a>
