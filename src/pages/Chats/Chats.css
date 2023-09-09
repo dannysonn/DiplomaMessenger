@@ -8,6 +8,8 @@
 
 .Chats__container {
     max-width: 1440px;
+    max-height: 90vh;
+    height: 100%;
     width: 100%;
     border-radius: 30px;
     background: #FFF;
@@ -15,6 +17,10 @@
 }
 
 .Chats__sidebar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
     box-sizing: border-box;
@@ -51,9 +57,9 @@
 }
 
 .Chats_sidebar__search_input {
+    position: relative;
     box-sizing: border-box;
     width: 100%;
-    margin: 37px 0 49px;
     padding: 18px 60px;
     border-radius: 30px;
     background: #E2E2E2;
@@ -64,12 +70,56 @@
     line-height: normal;
 }
 
+.Chats_sidebar__search_input_container {
+    position: relative;
+    margin: 37px 0 49px;
+}
+
+.Chats_sidebar__search_input_container::before {
+    position: absolute;
+    left: 22px;
+    top: 16px;
+    z-index: 1;
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 25 25' fill='none'%3E%3Cpath d='M13.7499 22.2604C13.0624 23.1771 11.9374 23.1771 11.2499 22.2604L9.68742 20.1771C9.51034 19.9479 9.13534 19.7604 8.85409 19.7604H8.33325C4.16659 19.7604 2.08325 18.7187 2.08325 13.5104V8.30206C2.08325 4.1354 4.16659 2.05206 8.33325 2.05206H16.6666C20.8333 2.05206 22.9166 4.1354 22.9166 8.30206V13.5104' stroke='%23696969' stroke-width='1.5' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22.9167 22.9167L21.875 21.875M18.9583 22.2917C19.8424 22.2917 20.6902 21.9405 21.3154 21.3154C21.9405 20.6902 22.2917 19.8424 22.2917 18.9583C22.2917 18.0743 21.9405 17.2264 21.3154 16.6013C20.6902 15.9762 19.8424 15.625 18.9583 15.625C18.0743 15.625 17.2264 15.9762 16.6013 16.6013C15.9762 17.2264 15.625 18.0743 15.625 18.9583C15.625 19.8424 15.9762 20.6902 16.6013 21.3154C17.2264 21.9405 18.0743 22.2917 18.9583 22.2917Z' stroke='%23696969' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16.6625 11.4583H16.6729M12.4948 11.4583H12.5052M8.32812 11.4583H8.33646' stroke='%23696969' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+
 .Chats_sidebar__search_input:hover {
     transform: scale(1.01);
 }
 
 .Chats_sidebar__wrapper {
+    max-height: 380px;
+    overflow: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 28px;
+}
+
+.Chats_sidebar__wrapper::-webkit-scrollbar {
+    width: 2px;
+    margin-left: 5px;
+}
+
+.Chats_sidebar__wrapper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+.Chats_sidebar__wrapper::-webkit-scrollbar-thumb {
+    background: #476CFF;
+    border-radius: 10px;
+}
+
+.Chats_sidebar__footer {
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
 }
