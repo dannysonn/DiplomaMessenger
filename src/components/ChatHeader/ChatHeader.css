@@ -1,0 +1,35 @@
+.Chat-header__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.Chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 53px;
+    border-bottom: 1px solid black;
+}
+
+.Chat-header__info {
+    display: flex;
+    gap: 32px;
+}
+
+.Chat-header__controls {
+    display: flex;
+    gap: 24px;
+}
+
+.Chat-header__add-user {
+    width: 23px;
+    height: 23px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 23 23' fill='none'%3E%3Ccircle cx='11.25' cy='11.25' r='10.5' stroke='black' stroke-width='1.5'/%3E%3Cline x1='11.233' y1='5.625' x2='11.233' y2='16.875' stroke='black' stroke-width='1.5'/%3E%3Cline x1='5.625' y1='11.2671' x2='16.875' y2='11.2671' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+
+.Chat-header__delete-user {
+    width: 23px;
+    height: 23px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='10.25' stroke='black' stroke-width='1.5'/%3E%3Cline x1='7.11077' y1='7.11091' x2='14.8889' y2='14.8891' stroke='black' stroke-width='1.5'/%3E%3Cline x1='7.11078' y1='14.8891' x2='14.889' y2='7.11093' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center/contain;
+}

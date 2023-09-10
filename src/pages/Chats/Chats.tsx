@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Chats.css";
 import Input from "../../components/Input/Input";
 import Chat from "../../components/Chat/Chat";
+import ChatHeader from "../../components/ChatHeader/ChatHeader";
 
 function Chats() {
   return (
@@ -40,19 +41,18 @@ function Chats() {
           </div>
 
           <footer className={styles["Chats-sidebar__footer"]}>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label,jsx-a11y/anchor-has-content */}
             <a
               href="/profile"
               className={styles["Chats-sidebar__profile-link"]}
-            >
-              <img src="" alt="" />
-            </a>
-            <form action="">
-              <button className="Chats-sidebar__logout" type="submit">
-                Logout
-              </button>
-            </form>
+            />
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button className={styles["Chats-sidebar__logout"]} type="submit" />
           </footer>
         </aside>
+        <div className={styles["Chat-content"]}>
+          <ChatHeader />
+        </div>
       </div>
     </main>
   );
