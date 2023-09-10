@@ -1,4 +1,4 @@
-.Auth_input__label {
+.Auth-input__label {
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
@@ -9,15 +9,15 @@
     line-height: 9px;
 }
 
-.Auth_input__label:last-of-type {
+.Auth-input__label:last-of-type {
     margin-bottom: 0;
 }
 
-.Auth_input__label .Auth_input__label_text {
+.Auth-input__label .Auth_input__label_text {
     margin-bottom: 7px;
 }
 
-.Auth_input {
+.Auth-input {
     padding: 0 0 7px;
     border-bottom: 1px solid #999;
     color: #1E1E1E;
@@ -27,10 +27,10 @@
     line-height: 13px; /* 92.857% */
 }
 
-.Auth_input:hover {
+.Auth-input:hover {
     border-bottom: 1px solid #3369F3;
 }
 
-.Auth_input:focus {
+.Auth-input:focus {
     border-bottom: 1px solid #3369F3;
 }

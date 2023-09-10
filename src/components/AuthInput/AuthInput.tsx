@@ -13,10 +13,10 @@ interface AuthInputProps {
 function AuthInput({ labelText, placeholder, type, id }: AuthInputProps) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label htmlFor={id} className={styles.Auth_input__label}>
-      <span className={styles.Auth_input__label_text}>{labelText}</span>
+    <label htmlFor={id} className={styles["Auth-input__label"]}>
+      <span className={styles["Auth-input__label-text"]}>{labelText}</span>
       <Input
-        inputClass={styles.Auth_input}
+        inputClass={styles["Auth-input"]}
         type={type}
         id={id}
         placeholder={placeholder}

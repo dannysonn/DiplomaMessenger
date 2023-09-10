@@ -19,15 +19,15 @@ function AuthForm({
 }: AuthFormProps) {
   return (
     <div className={styles.Auth__container}>
-      <form className={styles.Auth_form}>
-        <h1 className={styles.Auth_form__title}>{title}</h1>
+      <form className={styles["Auth-form"]}>
+        <h1 className={styles["Auth-form__title"]}>{title}</h1>
 
         {AuthInputs}
 
-        <button type="button" className={styles.Auth_form__btn}>
+        <button type="button" className={styles["Auth-form__btn"]}>
           {btnText}
         </button>
-        <Link to={linkUrl} className={styles.Auth__registration_link}>
+        <Link to={linkUrl} className={styles["Auth__registration-link"]}>
           {linkText}
         </Link>
       </form>
