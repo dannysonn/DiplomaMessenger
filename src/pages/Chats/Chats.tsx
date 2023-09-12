@@ -3,6 +3,7 @@ import styles from "./Chats.css";
 import Input from "../../components/Input/Input";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
+import ChatMessages from "../../components/ChatMessages/ChatMessages";
 
 function Chats() {
   return (
@@ -52,25 +53,7 @@ function Chats() {
         </aside>
         <div className={styles["Chat-content"]}>
           <ChatHeader />
-          <div className={styles["Chat-messages"]}>
-            <div className={styles["Incoming-message"]}>
-              <img
-                src="https://placehold.co/50x50"
-                alt="avatar"
-                className={styles["Message-avatar"]}
-              />
-              <p className={styles["Incoming-message__text"]}>Hi, Mrs. Lilly</p>
-            </div>
-
-            <div className={styles["Sent-message"]}>
-              <p className={styles["Sent-message__text"]}>Hi, Mrs. Lilly</p>
-              <img
-                src="https://placehold.co/50x50"
-                alt="avatar"
-                className={styles["Message-avatar"]}
-              />
-            </div>
-          </div>
+          <ChatMessages />
         </div>
       </div>
     </main>

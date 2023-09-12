@@ -1,0 +1,42 @@
+.Message {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.Message__text {
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0;
+    border-radius: 30px;
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Message__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.Message--incoming .Message__text {
+    background: #696969;
+}
+
+.Message--sent .Message__text {
+    background: #476CFF;
+}
+
+.Message--incoming {
+    float: left;
+}
+
+.Message--sent {
+    float: right;
+    flex-direction: row-reverse;
+}

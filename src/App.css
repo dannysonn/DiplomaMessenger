@@ -1,3 +1,19 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+*::before {
+    box-sizing: inherit;
+}
+
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: Inter, sans-serif;
     box-sizing: content-box;
