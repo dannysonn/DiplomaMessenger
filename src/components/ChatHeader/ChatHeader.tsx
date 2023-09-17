@@ -13,9 +13,7 @@ function ChatHeader() {
         <h2 className={styles["Chat-header__title"]}>Chat name</h2>
       </div>
       <div className={styles["Chat-header__controls"]}>
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button type="button" className={styles["Chat-header__add-user"]} />
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button type="button" className={styles["Chat-header__delete-user"]} />
       </div>
     </header>
