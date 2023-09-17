@@ -4,6 +4,7 @@ import Input from "../../components/Input/Input";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
+import ChatFooter from "../../components/ChatFooter/ChatFooter";
 
 function Chats() {
   return (
@@ -13,7 +14,6 @@ function Chats() {
           <header className={styles["Chats-sidebar__header"]}>
             <h2 className={styles["Chats-sidebar__title"]}>Chats</h2>
             <form action="">
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 className={styles["Chats-sidebar__add-user"]}
                 type="submit"
@@ -47,13 +47,13 @@ function Chats() {
               href="/profile"
               className={styles["Chats-sidebar__profile-link"]}
             />
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button className={styles["Chats-sidebar__logout"]} type="submit" />
           </footer>
         </aside>
         <div className={styles["Chat-content"]}>
           <ChatHeader />
           <ChatMessages />
+          <ChatFooter />
         </div>
       </div>
     </main>

@@ -3,15 +3,20 @@ html {
 }
 
 * {
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 *::before {
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #476CFF;
+    border-radius: 10px;
 }
 
 body {
@@ -31,6 +36,7 @@ input {
 button {
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 a {
