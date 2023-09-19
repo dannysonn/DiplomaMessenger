@@ -20,7 +20,7 @@ const AuthInputs = [
 
 function Login() {
   return (
-    <main className={styles.Auth}>
+    <main className={`${styles.Main} ${styles.Auth}`}>
       <AuthForm
         title="Login"
         AuthInputs={AuthInputs}

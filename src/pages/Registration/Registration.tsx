@@ -40,7 +40,7 @@ const AuthInputs = [
 
 function Registration() {
   return (
-    <main className={styles.Auth}>
+    <main className={`${styles.Main} ${styles.Auth}`}>
       <AuthForm
         title="Registration"
         AuthInputs={AuthInputs}

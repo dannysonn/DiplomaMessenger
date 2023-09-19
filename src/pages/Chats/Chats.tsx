@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Chats.css";
+import globalStyles from "../../App.css";
 import Input from "../../components/Input/Input";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
@@ -9,7 +10,7 @@ import ChatFooter from "../../components/ChatFooter/ChatFooter";
 function Chats() {
   return (
     <main className={styles.Chats}>
-      <div className={styles.Chats__container}>
+      <div className={globalStyles.Container}>
         <aside className={styles.Chats__sidebar}>
           <header className={styles["Chats-sidebar__header"]}>
             <h2 className={styles["Chats-sidebar__title"]}>Chats</h2>

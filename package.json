@@ -12,8 +12,8 @@
     "dev": "webpack --env development",
     "watch": "webpack --watch",
     "start": "webpack serve --open --env development",
-    "lint": "eslint src --fix && npm run styleling",
-    "styleling": "npx stylelint \"**/*.css\" --fix",
+    "lint": "eslint src --fix && npm run stylelint",
+    "stylelint": "npx stylelint \"**/*.css\" --fix",
     "prepare": "husky install"
   },
   "author": "Danila Kryuchkov",
