@@ -5,19 +5,18 @@ interface InputProps {
   type: string;
   id?: string;
   placeholder: string;
+  readonly?: boolean;
 }
 
-function Input({ inputClass, type, id, placeholder }: InputProps) {
+function Input({ inputClass, type, id, placeholder, readonly }: InputProps) {
   return (
-    <>
-      <input
-        type={type}
-        id={id}
-        className={inputClass}
-        placeholder={placeholder}
-      />
-      <span className="" />
-    </>
+    <input
+      type={type}
+      id={id}
+      className={inputClass}
+      placeholder={placeholder}
+      readOnly={readonly}
+    />
   );
 }
 
