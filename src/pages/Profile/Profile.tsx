@@ -2,6 +2,7 @@ import React from "react";
 import globalStyles from "../../App.css";
 import styles from "./Profile.css";
 import ProfileContent from "../../components/ProfileContent/ProfileContent";
+import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 
 function Profile() {
   return (
@@ -13,11 +14,7 @@ function Profile() {
         </aside>
 
         <div className={styles["Profile-content__container"]}>
-          <img
-            className={styles["Profile-avatar"]}
-            src="../../assets/images/svg/default-chat-img.svg"
-            alt="Avatar"
-          />
+          <ProfileAvatar />
           <ProfileContent />
         </div>
       </div>
