@@ -3,9 +3,13 @@ import styles from "./ProfileData.css";
 
 interface ProfileDataProps {
   handleDataChange: MouseEventHandler<HTMLButtonElement>;
+  handlePasswordChange: MouseEventHandler<HTMLButtonElement>;
 }
 
-function ProfileData({ handleDataChange }: ProfileDataProps) {
+function ProfileData({
+  handleDataChange,
+  handlePasswordChange,
+}: ProfileDataProps) {
   return (
     <div className={styles["Profile-data"]}>
       <div className={styles["Profile-data__items"]}>
@@ -38,7 +42,11 @@ function ProfileData({ handleDataChange }: ProfileDataProps) {
         >
           Change data
         </button>
-        <button type="button" className={styles["Profile-data__btn"]}>
+        <button
+          type="button"
+          className={styles["Profile-data__btn"]}
+          onClick={handlePasswordChange}
+        >
           Change password
         </button>
         <button

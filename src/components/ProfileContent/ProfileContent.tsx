@@ -1,30 +1,38 @@
 import React, { useState } from "react";
 import styles from "../../pages/Profile/Profile.css";
-import ChangeData from "../ChangeData/ChangeData";
 import ProfileData from "../ProfileData/ProfileData";
+import ChangeableProfile from "../ChangeableProfile/ChangeableProfile";
 
 function ProfileContent() {
   const [isChangeableData, setChangeableData] = useState(false);
   const [isChangeablePassword, setChangeablePassword] = useState(false);
 
   const handleDataChange = () => {
-    setChangeablePassword(false);
     setChangeableData(true);
   };
 
   const handleSaveData = () => {
     setChangeableData(false);
+    setChangeablePassword(false);
+  };
+
+  const handlePasswordChange = () => {
+    setChangeablePassword(true);
   };
 
   return (
     <div className={styles["Profile-content"]}>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {isChangeableData ? (
-        <ChangeData handleSaveData={handleSaveData} />
-      ) : isChangeablePassword ? (
-        <div>change pass</div>
+      {isChangeableData || isChangeablePassword ? (
+        <ChangeableProfile
+          handleSaveData={handleSaveData}
+          isChangeableData={isChangeableData}
+          isChangeablePassword={isChangeablePassword}
+        />
       ) : (
-        <ProfileData handleDataChange={handleDataChange} />
+        <ProfileData
+          handleDataChange={handleDataChange}
+          handlePasswordChange={handlePasswordChange}
+        />
       )}
     </div>
   );

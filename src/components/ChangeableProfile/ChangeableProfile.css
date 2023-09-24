@@ -1,4 +1,4 @@
-.Change-data__item {
+.Changeable-profile__item {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -11,11 +11,11 @@
     border-bottom: 1px solid #EAEAEA;
 }
 
-.Change-data__item input {
+.Changeable-profile__item input {
     text-align: right;
 }
 
-.Change-data__items {
+.Changeable-profile__items {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     margin-bottom: 60px;
 }
 
-.Change-data__btn {
+.Changeable-profile__btn {
     width: fit-content;
     padding: 12px 125px;
     border-radius: 30px;
