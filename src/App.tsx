@@ -11,10 +11,10 @@ import Profile from "./pages/Profile/Profile";
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/registration" element={<Registration />} />
       <Route path="/chats" element={<Chats />} />
-      <Route path="/" element={<Profile />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

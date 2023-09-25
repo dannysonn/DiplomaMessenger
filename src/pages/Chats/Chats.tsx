@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
 import Input from "../../components/Input/Input";
@@ -8,6 +9,12 @@ import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
 
 function Chats() {
+  const navigate = useNavigate();
+
+  const navigateToAuth = () => {
+    navigate("/");
+  };
+
   return (
     <main className={styles.Chats}>
       <div className={globalStyles.Container}>
@@ -44,11 +51,15 @@ function Chats() {
 
           <footer className={styles["Chats-sidebar__footer"]}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label,jsx-a11y/anchor-has-content */}
-            <a
-              href="/profile"
+            <Link
+              to="/profile"
               className={styles["Chats-sidebar__profile-link"]}
             />
-            <button className={styles["Chats-sidebar__logout"]} type="submit" />
+            <button
+              className={styles["Chats-sidebar__logout"]}
+              type="submit"
+              onClick={navigateToAuth}
+            />
           </footer>
         </aside>
         <div className={styles["Chat-content"]}>

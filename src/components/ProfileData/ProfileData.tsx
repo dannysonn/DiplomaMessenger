@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProfileData.css";
 
 interface ProfileDataProps {
@@ -10,6 +11,12 @@ function ProfileData({
   handleDataChange,
   handlePasswordChange,
 }: ProfileDataProps) {
+  const navigate = useNavigate();
+
+  const navigateToAuth = () => {
+    navigate("/");
+  };
+
   return (
     <div className={styles["Profile-data"]}>
       <div className={styles["Profile-data__items"]}>
@@ -52,6 +59,7 @@ function ProfileData({
         <button
           type="button"
           className={`${styles["Profile-data__btn"]} ${styles["Profile-data__btn--red"]}`}
+          onClick={navigateToAuth}
         >
           Log out
         </button>
