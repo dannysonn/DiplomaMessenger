@@ -1,26 +1,44 @@
 import React from "react";
-
+import { FieldErrors } from "react-hook-form";
 import styles from "./AuthInput.css";
-import Input from "../Input/Input";
 
 interface AuthInputProps {
   labelText: string;
   type: string;
   id: string;
   placeholder: string;
+  register: any;
+  inputName: string;
+  errors: FieldErrors<any>;
 }
 
-function AuthInput({ labelText, placeholder, type, id }: AuthInputProps) {
+function AuthInput({
+  labelText,
+  placeholder,
+  type,
+  id,
+  register,
+  inputName,
+  errors,
+}: AuthInputProps) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label htmlFor={id} className={styles["Auth-input__label"]}>
       <span className={styles["Auth-input__label-text"]}>{labelText}</span>
-      <Input
-        inputClass={styles["Auth-input"]}
+      <input
+        {...register(inputName)}
         type={type}
         id={id}
+        className={styles["Auth-input"]}
         placeholder={placeholder}
       />
+      {errors[inputName] ? (
+        <p className={styles["Auth-input__error"]}>
+          {errors[inputName]?.message?.toString()}
+        </p>
+      ) : (
+        ""
+      )}
     </label>
   );
 }

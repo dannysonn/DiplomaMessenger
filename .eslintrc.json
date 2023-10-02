@@ -26,6 +26,8 @@
     ],
     "rules": {
         "react/require-default-props": "off",
-        "jsx-a11y/control-has-associated-label": "off"
+        "jsx-a11y/control-has-associated-label": "off",
+        "react/jsx-props-no-spreading": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }

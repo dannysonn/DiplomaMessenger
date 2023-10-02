@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "../Input/Input";
 import styles from "../ChangeableProfile/ChangeableProfile.css";
 
 interface ChangeableDataItemsProps {
@@ -16,43 +15,23 @@ function ChangeableProfileItems({
       <>
         <div className={styles["Changeable-profile__item"]}>
           Email
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="email"
-            placeholder="programmer2000@yandex.ru"
-          />
+            <input type="email" className={styles["Changeable-profile__input"]} placeholder="programmer2000@yandex.ru"/>
         </div>
         <div className={styles["Changeable-profile__item"]}>
           Login
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="text"
-            placeholder="programmer2000"
-          />
+            <input type="text" className={styles["Changeable-profile__input"]} placeholder="programmer2000"/>
         </div>
         <div className={styles["Changeable-profile__item"]}>
           Name
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="text"
-            placeholder="Elon"
-          />
+            <input type="text" className={styles["Changeable-profile__input"]} placeholder="Elon"/>
         </div>
         <div className={styles["Changeable-profile__item"]}>
           Surname
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="text"
-            placeholder="Musk"
-          />
+            <input type="text" className={styles["Changeable-profile__input"]} placeholder="Musk"/>
         </div>
         <div className={styles["Changeable-profile__item"]}>
           Phone
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="phone"
-            placeholder="999-99-99"
-          />
+            <input type="phone" className={styles["Changeable-profile__input"]} placeholder="999-99-99"/>
         </div>
       </>
     );
@@ -62,19 +41,11 @@ function ChangeableProfileItems({
       <>
         <div className={styles["Changeable-profile__item"]}>
           Password
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="password"
-            placeholder="********"
-          />
+            <input type="password" className={styles["Changeable-profile__input"]} placeholder="********"/>
         </div>
         <div className={styles["Changeable-profile__item"]}>
           Repeat password
-          <Input
-            inputClass={styles["Changeable-profile__input"]}
-            type="password"
-            placeholder="********"
-          />
+            <input type="password" className={styles["Changeable-profile__input"]} placeholder="********"/>
         </div>
       </>
     );

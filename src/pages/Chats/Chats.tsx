@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
-import Input from "../../components/Input/Input";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
@@ -30,12 +29,7 @@ function Chats() {
           </header>
           <form action="" className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>
-              <Input
-                inputClass={styles["Chats-sidebar__search-input"]}
-                type="text"
-                id="search-input"
-                placeholder="Search chat"
-              />
+              <input type="text" id="search-input" placeholder="Search chat" className={styles["Chats-sidebar__search-input"]}/>
             </div>
           </form>
           <div className={styles["Chats-sidebar__wrapper"]}>
