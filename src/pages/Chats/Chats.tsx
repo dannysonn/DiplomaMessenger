@@ -29,7 +29,12 @@ function Chats() {
           </header>
           <form action="" className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>
-              <input type="text" id="search-input" placeholder="Search chat" className={styles["Chats-sidebar__search-input"]}/>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search chat"
+                className={styles["Chats-sidebar__search-input"]}
+              />
             </div>
           </form>
           <div className={styles["Chats-sidebar__wrapper"]}>
