@@ -18,6 +18,9 @@ interface AuthFormProps {
   isLoginPage: boolean;
 }
 
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
 const schema = yup.object().shape({
   login: string().required("No login provided"),
   password: string()
@@ -27,6 +30,13 @@ const schema = yup.object().shape({
     .minUppercase(1, "at least 1 upper case letter")
     .minNumbers(1, "at least 1 number")
     .minSymbols(1, "at least 1 special character"),
+  secondPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match"),
+  email: string().email().min(1, "No email provided"),
+  name: string().min(1, "No name provided"),
+  surname: string().min(1, "No surname provided"),
+  phone: yup.string().matches(phoneRegExp, "Phone number is not valid"),
 });
 
 function AuthForm({
@@ -45,8 +55,7 @@ function AuthForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<any> = () => {
     navigate("/chats");
   };
 
