@@ -6,7 +6,7 @@ import ChangeableProfileItems from "../ChangeableProfileItems/ChangeableProfileI
 import schema from "../../utils/UserSchema";
 
 interface ChangeDataProps {
-  handleSaveData: MouseEventHandler<HTMLButtonElement>;
+  backToProfile: MouseEventHandler<HTMLButtonElement>;
   isChangeableData: boolean;
   isChangeablePassword: boolean;
 }
@@ -17,7 +17,7 @@ const onSubmit = (handleSaveData: any) => {
 };
 
 function ChangeableProfile({
-  handleSaveData,
+  backToProfile,
   isChangeableData,
   isChangeablePassword,
 }: ChangeDataProps) {
@@ -33,7 +33,7 @@ function ChangeableProfile({
       <form
         className={styles["Changeable-profile__items"]}
         id="profileForm"
-        onSubmit={handleSubmit(() => onSubmit(handleSaveData))}
+        onSubmit={handleSubmit(() => onSubmit(backToProfile))}
       >
         <ChangeableProfileItems
           isChangeableData={isChangeableData}
@@ -42,13 +42,22 @@ function ChangeableProfile({
           errors={errors}
         />
       </form>
-      <button
-        form="profileForm"
-        type="submit"
-        className={styles["Changeable-profile__btn"]}
-      >
-        Save
-      </button>
+      <div className={styles["Changeable-profile__btns"]}>
+        <button
+          form="profileForm"
+          type="submit"
+          className={styles["Changeable-profile__btn"]}
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          className={styles["Changeable-profile__btn"]}
+          onClick={backToProfile}
+        >
+          Back to profile
+        </button>
+      </div>
     </>
   );
 }

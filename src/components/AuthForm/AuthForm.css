@@ -25,16 +25,6 @@
 
 .Auth-form__btn {
     margin-top: 159px;
-    padding: 12px 70px;
-    background: #3369F3;
-    cursor: pointer;
-    color: #FFF;
-    text-align: center;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 13px;
-    border-radius: 30px;
 }
 
 .Auth-form__btn:hover {

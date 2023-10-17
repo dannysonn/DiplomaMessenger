@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
+import Button from "../Button/Button";
 
 interface AuthFormProps {
   title: string;
@@ -128,9 +129,11 @@ function AuthForm({
           </>
         )}
 
-        <button type="submit" className={styles["Auth-form__btn"]}>
-          {btnText}
-        </button>
+        <Button
+          type="submit"
+          text={btnText}
+          additionalClass={styles["Auth-form__btn"]}
+        />
         <Link to={linkUrl} className={styles["Auth__registration-link"]}>
           {linkText}
         </Link>

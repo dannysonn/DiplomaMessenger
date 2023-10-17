@@ -1,16 +1,29 @@
 import React from "react";
+import styles from "./Button.css";
 
 interface ButtonProps {
   type: "submit" | "button";
-  className: string;
+  form?: string;
+  cssModifier?: string;
+  additionalClass?: string;
+  text: string;
 }
 
-function Button({ type, className }: ButtonProps) {
+function Button({
+  type,
+  form,
+  cssModifier,
+  additionalClass,
+  text,
+}: ButtonProps) {
   return (
     <button
       type={type === "submit" ? "submit" : "button"}
-      className={className}
-    />
+      className={`${styles.btn} ${additionalClass || ""} ${cssModifier || ""}`}
+      form={form}
+    >
+      {text}
+    </button>
   );
 }
 

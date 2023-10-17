@@ -11,7 +11,7 @@ function ProfileContent() {
     setChangeableData(true);
   };
 
-  const handleSaveData = () => {
+  const backToProfile = () => {
     setChangeableData(false);
     setChangeablePassword(false);
   };
@@ -24,7 +24,7 @@ function ProfileContent() {
     <div className={styles["Profile-content"]}>
       {isChangeableData || isChangeablePassword ? (
         <ChangeableProfile
-          handleSaveData={handleSaveData}
+          backToProfile={backToProfile}
           isChangeableData={isChangeableData}
           isChangeablePassword={isChangeablePassword}
         />

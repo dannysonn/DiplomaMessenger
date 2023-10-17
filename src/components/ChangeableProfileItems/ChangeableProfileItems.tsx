@@ -28,7 +28,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.email ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.email?.message?.toString()}
           </p>
         ) : (
@@ -44,7 +44,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.login ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.login?.message?.toString()}
           </p>
         ) : (
@@ -60,7 +60,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.name ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.name?.message?.toString()}
           </p>
         ) : (
@@ -76,7 +76,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.surname ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.surname?.message?.toString()}
           </p>
         ) : (
@@ -92,7 +92,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.phone ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.phone?.message?.toString()}
           </p>
         ) : (
@@ -114,7 +114,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.password ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.password?.message?.toString()}
           </p>
         ) : (
@@ -130,7 +130,7 @@ function ChangeableProfileItems({
           />
         </div>
         {errors.secondPassword ? (
-          <p className={styles["Auth-input__error"]}>
+          <p className={styles["Changeable-profile__error"]}>
             {errors.secondPassword?.message?.toString()}
           </p>
         ) : (
