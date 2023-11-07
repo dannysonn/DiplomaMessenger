@@ -28,6 +28,12 @@
         "react/require-default-props": "off",
         "jsx-a11y/control-has-associated-label": "off",
         "react/jsx-props-no-spreading": "off",
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "prettier/prettier": [
+            "error",
+            {"endOfLine": "auto"}
+        ],
+        "import/prefer-default-export": "off",
+        "func-names": "off"
     }
 }

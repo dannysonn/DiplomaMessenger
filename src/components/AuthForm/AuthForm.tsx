@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
@@ -22,17 +24,18 @@ function AuthForm({
   linkUrl,
   isLoginPage,
 }: AuthFormProps) {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<any> = () => {
-    navigate("/chats");
+    dispatch(signIn(getValues()));
   };
 
   return (
