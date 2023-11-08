@@ -1,12 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AuthApi, { SignInData } from "../../API/AuthApi/AuthApi";
+import AuthApi from "../../API/AuthApi/AuthApi";
 
-export const signIn = createAsyncThunk(
-  "auth/signin",
-  async function (data: SignInData) {
-    AuthApi.signIn(data);
-  },
-);
+export const signIn = createAsyncThunk("auth/signin", async function (data) {
+  AuthApi.signIn(data);
+});
 
 type InitialStateType = {
   status: string;
@@ -28,7 +25,7 @@ const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(signIn.pending, () => {});
-    builder.addCase(signIn.fulfilled, (state) => {
+    builder.addCase(signIn.fulfilled, (state: InitialStateType) => {
       state.error = true;
     });
     builder.addCase(signIn.rejected, () => {});
