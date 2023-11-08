@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
-import { signIn } from "../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { removeError, signIn } from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
@@ -33,9 +33,16 @@ function AuthForm({
     resolver: yupResolver(schema),
   });
   const dispatch = useDispatch();
+  const shouldShowSignInError = useSelector((state) => state.signIn.error);
 
   const onSubmit: SubmitHandler<any> = () => {
     dispatch(signIn(getValues()));
+  };
+
+  const onChange = () => {
+    if (shouldShowSignInError) {
+      dispatch(removeError());
+    }
   };
 
   return (
@@ -53,6 +60,7 @@ function AuthForm({
               labelText="Login"
               type="text"
               errors={errors}
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -62,6 +70,7 @@ function AuthForm({
               labelText="Password"
               type="password"
               errors={errors}
+              onChange={onChange}
             />
           </>
         ) : (
@@ -74,6 +83,7 @@ function AuthForm({
               type="text"
               id="Email"
               placeholder="programmer2000@google.com"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -83,6 +93,7 @@ function AuthForm({
               type="text"
               id="Login"
               placeholder="programmer2000"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -92,6 +103,7 @@ function AuthForm({
               type="text"
               id="Name"
               placeholder="Elon"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -101,6 +113,7 @@ function AuthForm({
               type="text"
               id="Surname"
               placeholder="Musk"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -110,6 +123,7 @@ function AuthForm({
               type="text"
               id="Phone"
               placeholder="999-99-999"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -119,6 +133,7 @@ function AuthForm({
               type="text"
               id="Password"
               placeholder="********"
+              onChange={onChange}
             />
             <AuthInput
               register={register}
@@ -128,8 +143,17 @@ function AuthForm({
               type="text"
               id="PasswordSecond"
               placeholder="********"
+              onChange={onChange}
             />
           </>
+        )}
+
+        {shouldShowSignInError ? (
+          <p className={styles["Auth-input__error"]}>
+            Неверный логин или пароль
+          </p>
+        ) : (
+          ""
         )}
 
         <Button

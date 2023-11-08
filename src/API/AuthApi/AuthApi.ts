@@ -16,7 +16,10 @@ class AuthApi {
     this.axios.post(`${AuthApi.baseUrl}/signin`, {
       login,
       password,
-    });
+    }).then((res) => {
+      console.log(res)
+    })
+    .catch(err => console.error(err));
   }
 }
 

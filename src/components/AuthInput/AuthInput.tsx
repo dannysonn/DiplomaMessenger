@@ -10,6 +10,7 @@ interface AuthInputProps {
   register: any;
   inputName: string;
   errors: FieldErrors<any>;
+  onChange: any;
 }
 
 function AuthInput({
@@ -20,6 +21,7 @@ function AuthInput({
   register,
   inputName,
   errors,
+  onChange,
 }: AuthInputProps) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
@@ -31,6 +33,7 @@ function AuthInput({
         id={id}
         className={styles["Auth-input"]}
         placeholder={placeholder}
+        onChange={onChange}
       />
       {errors[inputName] ? (
         <p className={styles["Auth-input__error"]}>
