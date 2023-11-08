@@ -13,13 +13,14 @@ class AuthApi {
   });
 
   public static signIn({ login, password }: SignInData) {
-    this.axios.post(`${AuthApi.baseUrl}/signin`, {
-      login,
-      password,
-    }).then((res) => {
-      console.log(res)
-    })
-    .catch(err => console.error(err));
+    this.axios
+      .post(`${AuthApi.baseUrl}/signin`, {
+        login,
+        password,
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
 }
 

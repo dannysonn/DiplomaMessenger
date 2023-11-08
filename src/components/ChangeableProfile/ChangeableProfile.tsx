@@ -12,7 +12,6 @@ interface ChangeDataProps {
 }
 
 const onSubmit = (handleSaveData: any) => {
-  console.log("gfjdk");
   handleSaveData();
 };
 
