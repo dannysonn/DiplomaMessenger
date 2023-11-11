@@ -13,7 +13,6 @@ module.exports = (env) => {
     context: path.resolve(__dirname, "src"),
     entry: {
       index: "./index.tsx",
-      print: "./print.ts",
     },
     devServer: {
       static: {

@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 import { removeError, signIn } from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
 import Button from "../Button/Button";
+import { useAppDispatch } from "../../redux/hooks";
 
 interface AuthFormProps {
   title: string;
@@ -32,11 +34,13 @@ function AuthForm({
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const shouldShowSignInError = useSelector((state) => state.signIn.error);
+  const isPending = useSelector((state) => state.signIn.status) === "pending";
+  const { login, password } = getValues();
 
   const onSubmit: SubmitHandler<any> = () => {
-    dispatch(signIn(getValues()));
+    dispatch(signIn({ login, password }));
   };
 
   const onChange = () => {
@@ -156,11 +160,16 @@ function AuthForm({
           ""
         )}
 
-        <Button
-          type="submit"
-          text={btnText}
-          additionalClass={styles["Auth-form__btn"]}
-        />
+        {isPending ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            type="submit"
+            text={btnText}
+            additionalClass={styles["Auth-form__btn"]}
+          />
+        )}
+
         <Link to={linkUrl} className={styles["Auth__registration-link"]}>
           {linkText}
         </Link>
