@@ -25,6 +25,7 @@
 
 .Auth-form__btn {
     margin-top: 159px;
+    max-height: 36px;
 }
 
 .Auth-form__btn:hover {
@@ -44,4 +45,8 @@
 .Auth__registration-link:hover {
     transform: scale(1.03);
     text-decoration: underline;
+}
+
+.Auth-form__loader {
+    margin: 159px auto 0;
 }

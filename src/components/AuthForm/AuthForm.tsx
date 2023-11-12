@@ -10,6 +10,7 @@ import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
 import Button from "../Button/Button";
 import { useAppDispatch } from "../../redux/hooks";
+import InputError from "../InputError/InputError";
 
 interface AuthFormProps {
   title: string;
@@ -153,15 +154,13 @@ function AuthForm({
         )}
 
         {shouldShowSignInError ? (
-          <p className={styles["Auth-input__error"]}>
-            Неверный логин или пароль
-          </p>
+          <InputError text="Неверный логин или пароль" />
         ) : (
           ""
         )}
 
         {isPending ? (
-          <CircularProgress />
+          <CircularProgress className={styles["Auth-form__loader"]} size={36} />
         ) : (
           <Button
             type="submit"
