@@ -24,7 +24,7 @@
 }
 
 .Auth-form__btn {
-    margin-top: 159px;
+    margin-top: 70px;
     max-height: 36px;
 }
 
@@ -48,5 +48,5 @@
 }
 
 .Auth-form__loader {
-    margin: 159px auto 0;
+    margin: 70px auto 0;
 }

@@ -4,13 +4,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { removeError, signIn } from "../../redux/slices/authSlice";
+import { removeError, signIn, signUp } from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
 import Button from "../Button/Button";
 import { useAppDispatch } from "../../redux/hooks";
 import InputError from "../InputError/InputError";
+import { SignInData, SignUpData } from "../../API/AuthApi/AuthApi";
 
 interface AuthFormProps {
   title: string;
@@ -30,7 +31,6 @@ function AuthForm({
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -38,10 +38,13 @@ function AuthForm({
   const dispatch = useAppDispatch();
   const shouldShowSignInError = useSelector((state) => state.signIn.error);
   const isPending = useSelector((state) => state.signIn.status) === "pending";
-  const { login, password } = getValues();
 
-  const onSubmit: SubmitHandler<any> = () => {
-    dispatch(signIn({ login, password }));
+  const onSubmit: SubmitHandler<any> = (data) => {
+    if (isLoginPage) {
+      dispatch(signIn(data as SignInData));
+    } else {
+      dispatch(signUp(data as SignUpData));
+    }
   };
 
   const onChange = () => {

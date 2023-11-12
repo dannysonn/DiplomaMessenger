@@ -1,10 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AuthApi from "../../API/AuthApi/AuthApi";
+import AuthApi, { SignInData, SignUpData } from "../../API/AuthApi/AuthApi";
 
 export const signIn = createAsyncThunk(
   "auth/signIn",
-  async ({ login, password }) => {
-    const response = await AuthApi.signIn({ login, password });
+  async (data: SignInData) => {
+    const response = await AuthApi.signIn(data);
+    return response.data;
+  },
+);
+
+export const signUp = createAsyncThunk(
+  "auth/signUp",
+  async (data: SignUpData) => {
+    const response = await AuthApi.singUp(data);
     return response.data;
   },
 );
@@ -35,6 +43,16 @@ const authSlice = createSlice({
       state.status = "fulfilled";
     });
     builder.addCase(signIn.rejected, (state: InitialStateType) => {
+      state.status = "rejected";
+      state.error = true;
+    });
+    builder.addCase(signUp.pending, (state: InitialStateType) => {
+      state.status = "pending";
+    });
+    builder.addCase(signUp.fulfilled, (state: InitialStateType) => {
+      state.status = "fulfilled";
+    });
+    builder.addCase(signUp.rejected, (state: InitialStateType) => {
       state.status = "rejected";
       state.error = true;
     });
