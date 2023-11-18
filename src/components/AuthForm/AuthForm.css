@@ -5,6 +5,8 @@
     background: #FFF;
     box-shadow: 5px 5px 6px 0 rgb(0 0 0 / 14%);
     border-radius: 30px;
+    position: relative;
+    z-index: 10;
 }
 
 .Auth-form {

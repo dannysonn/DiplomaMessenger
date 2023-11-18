@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
@@ -38,17 +38,28 @@ function AuthForm({
   const dispatch = useAppDispatch();
   const shouldShowSignInError = useSelector((state) => state.signIn.error);
   const isPending = useSelector((state) => state.signIn.status) === "pending";
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     if (isLoginPage) {
-      dispatch(signIn(data as SignInData));
+      dispatch(signIn(data as SignInData))
+        .unwrap()
+        .then(() => {
+          navigate("/chats");
+        })
+        .catch((e) => console.error(e));
     } else {
-      dispatch(signUp(data as SignUpData));
+      dispatch(signUp(data as SignUpData))
+        .unwrap()
+        .then(() => {
+          navigate("/chats");
+        })
+        .catch((e) => console.error(e));
     }
   };
 
   const onChange = () => {
-    if (shouldShowSignInError) {
+    if (shouldShowSignInError && isLoginPage) {
       dispatch(removeError());
     }
   };
@@ -106,7 +117,7 @@ function AuthForm({
             <AuthInput
               register={register}
               errors={errors}
-              inputName="name"
+              inputName="first_name"
               labelText="Name"
               type="text"
               id="Name"
@@ -116,7 +127,7 @@ function AuthForm({
             <AuthInput
               register={register}
               errors={errors}
-              inputName="surname"
+              inputName="second_name"
               labelText="Surname"
               type="text"
               id="Surname"
@@ -138,7 +149,7 @@ function AuthForm({
               errors={errors}
               inputName="password"
               labelText="Password"
-              type="text"
+              type="password"
               id="Password"
               placeholder="********"
               onChange={onChange}
@@ -148,7 +159,7 @@ function AuthForm({
               errors={errors}
               inputName="secondPassword"
               labelText="Password (one more)"
-              type="text"
+              type="password"
               id="PasswordSecond"
               placeholder="********"
               onChange={onChange}
@@ -156,7 +167,7 @@ function AuthForm({
           </>
         )}
 
-        {shouldShowSignInError ? (
+        {shouldShowSignInError && isLoginPage ? (
           <InputError text="Неверный логин или пароль" />
         ) : (
           ""

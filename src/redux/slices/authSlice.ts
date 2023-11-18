@@ -28,7 +28,7 @@ const initialState: InitialStateType = {
 };
 
 const authSlice = createSlice({
-  name: "signIn",
+  name: "auth",
   initialState,
   reducers: {
     removeError(state?: InitialStateType) {
