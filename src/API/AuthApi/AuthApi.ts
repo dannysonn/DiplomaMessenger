@@ -31,9 +31,7 @@ class AuthApi {
   static axios = axios.create({ withCredentials: true });
 
   public static signIn(data: SignInData) {
-    return this.axios.post(`${AuthApi.baseUrl}/signin`, data, {
-      withCredentials: true,
-    });
+    return this.axios.post(`${AuthApi.baseUrl}/signin`, data);
   }
 
   public static singUp({
@@ -44,22 +42,22 @@ class AuthApi {
     password,
     phone,
   }: SignUpData) {
-    return this.axios.post(
-      `${AuthApi.baseUrl}/signup`,
-      {
-        first_name,
-        second_name,
-        login,
-        email,
-        password,
-        phone,
-      },
-      { withCredentials: true },
-    );
+    return this.axios.post(`${AuthApi.baseUrl}/signup`, {
+      first_name,
+      second_name,
+      login,
+      email,
+      password,
+      phone,
+    });
   }
 
   public static getUser() {
-    return this.axios.get(`${AuthApi.baseUrl}/user`, { withCredentials: true });
+    return this.axios.get(`${AuthApi.baseUrl}/user`);
+  }
+
+  public static logout() {
+    return this.axios.post(`${AuthApi.baseUrl}/logout`);
   }
 }
 

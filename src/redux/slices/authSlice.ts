@@ -26,6 +26,11 @@ export const getUser = createAsyncThunk("auth/getUser", async () => {
   return response.data;
 });
 
+export const logout = createAsyncThunk("auth/logout", async () => {
+  const response = await AuthApi.logout();
+  return response.data;
+});
+
 type InitialStateType = {
   status: string;
   error: null | boolean;
@@ -44,8 +49,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    removeError(state?: InitialStateType) {
-      state!.error = false;
+    removeError(state) {
+      state.error = false;
     },
   },
   extraReducers(builder) {
@@ -69,8 +74,14 @@ const authSlice = createSlice({
       state.status = "rejected";
       state.error = true;
     });
+    builder.addCase(getUser.fulfilled, (state: InitialStateType) => {
+      state.isAuth = true;
+    });
+    builder.addCase(logout.fulfilled, (state: InitialStateType) => {
+      state.isAuth = false;
+    });
   },
 });
 
 export default authSlice.reducer;
-export const { removeError } = authSlice.actions;
+export const { removeError, setIsAuth } = authSlice.actions;

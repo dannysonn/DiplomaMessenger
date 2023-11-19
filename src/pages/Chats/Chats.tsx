@@ -6,11 +6,15 @@ import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/slices/authSlice";
 
 function Chats() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const navigateToAuth = () => {
+  const navigateToAuth = async () => {
+    await dispatch(logout());
     navigate("/");
   };
 
