@@ -3,7 +3,7 @@ import authSlice from "./slices/authSlice";
 
 export const store = configureStore({
   reducer: combineReducers({
-    signIn: authSlice,
+    auth: authSlice,
   }),
 });
 

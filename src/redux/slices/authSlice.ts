@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AuthApi, { SignInData, SignUpData } from "../../API/AuthApi/AuthApi";
+import AuthApi, {
+  SignInData,
+  SignUpData,
+  UserData,
+} from "../../API/AuthApi/AuthApi";
 
 export const signIn = createAsyncThunk(
   "auth/signIn",
@@ -17,14 +21,23 @@ export const signUp = createAsyncThunk(
   },
 );
 
+export const getUser = createAsyncThunk("auth/getUser", async () => {
+  const response = await AuthApi.getUser();
+  return response.data;
+});
+
 type InitialStateType = {
   status: string;
   error: null | boolean;
+  user: UserData | null;
+  isAuth: boolean;
 };
 
 const initialState: InitialStateType = {
   status: "",
   error: false,
+  user: null,
+  isAuth: false,
 };
 
 const authSlice = createSlice({

@@ -4,7 +4,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { removeError, signIn, signUp } from "../../redux/slices/authSlice";
+import {
+  getUser,
+  removeError,
+  signIn,
+  signUp,
+} from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
@@ -36,8 +41,8 @@ function AuthForm({
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
-  const shouldShowSignInError = useSelector((state) => state.signIn.error);
-  const isPending = useSelector((state) => state.signIn.status) === "pending";
+  const shouldShowAuthError = useSelector((state) => state.auth.error);
+  const isPending = useSelector((state) => state.auth.status) === "pending";
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<any> = async (data) => {
@@ -46,6 +51,7 @@ function AuthForm({
         .unwrap()
         .then(() => {
           navigate("/chats");
+          dispatch(getUser());
         })
         .catch((e) => console.error(e));
     } else {
@@ -53,13 +59,14 @@ function AuthForm({
         .unwrap()
         .then(() => {
           navigate("/chats");
+          dispatch(getUser());
         })
         .catch((e) => console.error(e));
     }
   };
 
   const onChange = () => {
-    if (shouldShowSignInError && isLoginPage) {
+    if (shouldShowAuthError) {
       dispatch(removeError());
     }
   };
@@ -167,7 +174,7 @@ function AuthForm({
           </>
         )}
 
-        {shouldShowSignInError && isLoginPage ? (
+        {shouldShowAuthError ? (
           <InputError text="Неверный логин или пароль" />
         ) : (
           ""
@@ -183,7 +190,13 @@ function AuthForm({
           />
         )}
 
-        <Link to={linkUrl} className={styles["Auth__registration-link"]}>
+        <Link
+          to={linkUrl}
+          onClick={() => {
+            dispatch(removeError());
+          }}
+          className={styles["Auth__registration-link"]}
+        >
           {linkText}
         </Link>
       </form>
