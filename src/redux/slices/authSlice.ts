@@ -74,8 +74,9 @@ const authSlice = createSlice({
       state.status = "rejected";
       state.error = true;
     });
-    builder.addCase(getUser.fulfilled, (state: InitialStateType) => {
+    builder.addCase(getUser.fulfilled, (state: InitialStateType, action) => {
       state.isAuth = true;
+      state.user = action.payload as UserData;
     });
     builder.addCase(logout.fulfilled, (state: InitialStateType) => {
       state.isAuth = false;
