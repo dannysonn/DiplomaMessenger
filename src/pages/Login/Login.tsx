@@ -13,7 +13,7 @@ function Login() {
 
   useEffect(() => {
     dispatch(getUser());
-  }, []);
+  });
 
   useEffect(() => {
     if (isAuth) {

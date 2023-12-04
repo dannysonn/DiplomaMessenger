@@ -13,7 +13,7 @@ function Registration() {
 
   useEffect(() => {
     dispatch(getUser());
-  }, []);
+  });
 
   useEffect(() => {
     if (isAuth) {
