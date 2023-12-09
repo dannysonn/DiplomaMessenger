@@ -105,11 +105,12 @@ function ChangeableProfileItems({
     return (
       <>
         <div className={styles["Changeable-profile__item"]}>
-          Password
+          Старый пароль
           <input
             type="password"
             className={styles["Changeable-profile__input"]}
             placeholder="********"
+            name="oldPassword"
             {...register("password")}
           />
         </div>
@@ -121,11 +122,12 @@ function ChangeableProfileItems({
           ""
         )}
         <div className={styles["Changeable-profile__item"]}>
-          Repeat password
+          Новый пароль
           <input
             type="password"
             className={styles["Changeable-profile__input"]}
             placeholder="********"
+            name="newPassword"
             {...register("secondPassword")}
           />
         </div>

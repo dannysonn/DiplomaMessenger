@@ -13,6 +13,18 @@ export const changeData = createAsyncThunk(
   },
 );
 
+export const changePassword = createAsyncThunk(
+  "profile/changePassword",
+  async (data: ProfileData, { rejectWithValue }) => {
+    try {
+      const response = await ProfileApi.changePassword(data);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue("Старый пароль введён неверно");
+    }
+  },
+);
+
 type InitialStateType = {
   error: null | boolean;
 };

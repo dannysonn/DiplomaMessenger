@@ -8,7 +8,7 @@ import styles from "./ChangeableProfile.css";
 import ChangeableProfileItems from "../ChangeableProfileItems/ChangeableProfileItems";
 import { phoneRegExp } from "../../utils/UserSchema";
 import { useAppDispatch } from "../../redux/hooks";
-import { changeData } from "../../redux/slices/profileSlice";
+import { changeData, changePassword } from "../../redux/slices/profileSlice";
 import { getUser } from "../../redux/slices/authSlice";
 
 interface ChangeDataProps {
@@ -35,7 +35,9 @@ function ChangeableProfile({
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: isChangeableData
+      ? yupResolver(schema)
+      : yupResolver(yup.object().shape({})),
   });
 
   const shouldShowChangeDataError = useSelector((state) => state.profile.error);
@@ -43,16 +45,27 @@ function ChangeableProfile({
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data) => {
-    await dispatch(changeData(data))
-      .unwrap()
-      .then(() => {
-        dispatch(getUser()).then(() => {
-          backToProfile();
+    if (isChangeableData) {
+      await dispatch(changeData(data))
+        .unwrap()
+        .then(() => {
+          dispatch(getUser()).then(() => {
+            backToProfile();
+          });
+        })
+        .catch((e) => {
+          console.log(e);
         });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    } else if (isChangeablePassword) {
+      await dispatch(changePassword(data))
+        .unwrap()
+        .then(() => {
+          backToProfile();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
 
   return (
