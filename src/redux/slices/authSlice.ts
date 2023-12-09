@@ -85,4 +85,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { removeError, setIsAuth } = authSlice.actions;
+export const { removeError } = authSlice.actions;

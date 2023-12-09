@@ -1,10 +1,8 @@
-import React, { MouseEventHandler, useEffect } from "react";
+import React, { MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import styles from "./ProfileData.css";
-import { getUser } from "../../redux/slices/authSlice";
-import { useAppDispatch } from "../../redux/hooks";
 
 interface ProfileDataProps {
   handleDataChange: MouseEventHandler<HTMLButtonElement>;
@@ -16,12 +14,6 @@ function ProfileData({
   handlePasswordChange,
 }: ProfileDataProps) {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getUser());
-  });
-
   const user = useSelector((state) => state.auth.user);
 
   const navigateToAuth = () => {

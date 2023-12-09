@@ -56,7 +56,7 @@ function ChangeableProfileItems({
             type="text"
             className={styles["Changeable-profile__input"]}
             placeholder="Elon"
-            {...register("name")}
+            {...register("first_name")}
           />
         </div>
         {errors.name ? (
@@ -72,7 +72,7 @@ function ChangeableProfileItems({
             type="text"
             className={styles["Changeable-profile__input"]}
             placeholder="Musk"
-            {...register("surname")}
+            {...register("second_name")}
           />
         </div>
         {errors.surname ? (
