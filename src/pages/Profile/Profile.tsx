@@ -7,7 +7,7 @@ import ProfileContent from "../../components/ProfileContent/ProfileContent";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 
 function Profile() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAuth = useSelector((state) => state.user.isAuth);
   const navigate = useNavigate();
 
   useEffect(() => {

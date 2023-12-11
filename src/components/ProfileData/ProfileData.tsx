@@ -14,7 +14,7 @@ function ProfileData({
   handlePasswordChange,
 }: ProfileDataProps) {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.user);
 
   const navigateToAuth = () => {
     navigate("/");

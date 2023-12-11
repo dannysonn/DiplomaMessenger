@@ -6,7 +6,7 @@ import "./App.css";
 import Registration from "./pages/Registration/Registration";
 import Chats from "./pages/Chats/Chats";
 import Profile from "./pages/Profile/Profile";
-import { getUser } from "./redux/slices/authSlice";
+import { getUser } from "./redux/slices/userSlice";
 import { useAppDispatch } from "./redux/hooks";
 
 export default function App() {

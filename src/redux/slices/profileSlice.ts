@@ -27,7 +27,7 @@ export const changePassword = createAsyncThunk(
 
 export const changeAvatar = createAsyncThunk(
   "profile/changeAvatar",
-  async (data: ProfileData, { rejectWithValue }) => {
+  async (data: FormData, { rejectWithValue }) => {
     try {
       const response = await ProfileApi.changeAvatar(data);
       return response.data;
@@ -68,6 +68,12 @@ const profileSlice = createSlice({
     builder.addCase(changePassword.fulfilled, (state: InitialStateType) => {
       state.error = false;
     });
+    builder.addCase(
+      changeAvatar.fulfilled,
+      (state: InitialStateType, action) => {
+        state.user = action.payload;
+      },
+    );
   },
 });
 

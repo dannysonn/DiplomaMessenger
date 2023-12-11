@@ -8,12 +8,12 @@ import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
-import { logout } from "../../redux/slices/authSlice";
+import { logout } from "../../redux/slices/userSlice";
 
 function Chats() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAuth = useSelector((state) => state.user.isAuth);
 
   useEffect(() => {
     if (!isAuth) {

@@ -4,12 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import {
-  getUser,
-  removeError,
-  signIn,
-  signUp,
-} from "../../redux/slices/authSlice";
+import { removeError, signIn, signUp } from "../../redux/slices/authSlice";
 import styles from "./AuthForm.css";
 import AuthInput from "../AuthInput/AuthInput";
 import schema from "../../utils/UserSchema";
@@ -17,6 +12,7 @@ import Button from "../Button/Button";
 import { useAppDispatch } from "../../redux/hooks";
 import InputError from "../InputError/InputError";
 import { SignInData, SignUpData } from "../../API/AuthApi/AuthApi";
+import { getUser } from "../../redux/slices/userSlice";
 
 interface AuthFormProps {
   title: string;

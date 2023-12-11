@@ -21,8 +21,8 @@ class ProfileApi {
     return this.axios.put(`${ProfileApi.baseUrl}/password`, data);
   }
 
-  public static changeAvatar(data: ProfileData) {
-    return this.axios.put(`${ProfileApi.baseUrl}/avatar`, data);
+  public static changeAvatar(data: FormData) {
+    return this.axios.put(`${ProfileApi.baseUrl}/profile/avatar`, data);
   }
 }
 

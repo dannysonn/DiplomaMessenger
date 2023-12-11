@@ -9,7 +9,7 @@ import ChangeableProfileItems from "../ChangeableProfileItems/ChangeableProfileI
 import { phoneRegExp } from "../../utils/UserSchema";
 import { useAppDispatch } from "../../redux/hooks";
 import { changeData, changePassword } from "../../redux/slices/profileSlice";
-import { getUser } from "../../redux/slices/authSlice";
+import { getUser } from "../../redux/slices/userSlice";
 import InputError from "../InputError/InputError";
 
 interface ChangeDataProps {

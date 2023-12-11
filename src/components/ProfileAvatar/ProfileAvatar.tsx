@@ -1,30 +1,36 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
 import styles from "../../pages/Profile/Profile.css";
 import { useAppDispatch } from "../../redux/hooks";
 import { changeAvatar } from "../../redux/slices/profileSlice";
-import schema from "../../utils/UserSchema";
 
 function ProfileAvatar() {
   const imageRef = useRef(null);
+  const formRef = useRef(null);
   const dispatch = useAppDispatch();
 
   const onSubmit = (data) => {
-    dispatch(changeAvatar(data));
+    const file = data.avatar[0];
+    const formData = new FormData();
+    formData.append("avatar", file);
+    dispatch(changeAvatar(formData));
   };
 
-  const { register, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const { register, handleSubmit } = useForm();
+  const avatar = useSelector((state) => state.user.user?.avatar);
 
   return (
     <div className={styles["Profile-avatar"]}>
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <label htmlFor="avatar" ref={imageRef}>
           <img
             className={styles["Profile-avatar__image"]}
-            src="../../assets/images/svg/default-chat-img.svg"
+            src={
+              avatar
+                ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
+                : "../../assets/images/svg/default-chat-img.svg"
+            }
             alt="Avatar"
           />
         </label>
@@ -36,6 +42,7 @@ function ProfileAvatar() {
           accept="image/png, image/jpeg"
           {...register("avatar")}
         />
+        <button type="submit">submit</button>
         <div
           className={styles["Profile-avatar__overlay"]}
           onClick={() => imageRef.current.click()}

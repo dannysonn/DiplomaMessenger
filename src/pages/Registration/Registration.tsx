@@ -5,7 +5,7 @@ import styles from "../../App.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
 function Registration() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAuth = useSelector((state) => state.user.isAuth);
   const navigate = useNavigate();
 
   useEffect(() => {
