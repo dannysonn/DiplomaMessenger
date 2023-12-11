@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -12,8 +13,15 @@ import { logout } from "../../redux/slices/authSlice";
 function Chats() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
-  const navigateToAuth = async () => {
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleLogout = async () => {
     await dispatch(logout());
     navigate("/");
   };
@@ -61,7 +69,7 @@ function Chats() {
             <button
               className={styles["Chats-sidebar__logout"]}
               type="submit"
-              onClick={navigateToAuth}
+              onClick={handleLogout}
             />
           </footer>
         </aside>

@@ -20,6 +20,10 @@ class ProfileApi {
   public static changePassword(data: ProfileData) {
     return this.axios.put(`${ProfileApi.baseUrl}/password`, data);
   }
+
+  public static changeAvatar(data: ProfileData) {
+    return this.axios.put(`${ProfileApi.baseUrl}/avatar`, data);
+  }
 }
 
 export default ProfileApi;

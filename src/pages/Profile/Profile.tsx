@@ -1,11 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import globalStyles from "../../App.css";
 import styles from "./Profile.css";
 import ProfileContent from "../../components/ProfileContent/ProfileContent";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 
 function Profile() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <main className={globalStyles.Main}>
       <div className={globalStyles.Container}>

@@ -25,12 +25,26 @@ export const changePassword = createAsyncThunk(
   },
 );
 
+export const changeAvatar = createAsyncThunk(
+  "profile/changeAvatar",
+  async (data: ProfileData, { rejectWithValue }) => {
+    try {
+      const response = await ProfileApi.changeAvatar(data);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue("Некорректный формат аватарки");
+    }
+  },
+);
+
 type InitialStateType = {
   error: null | boolean;
+  passError: null | boolean;
 };
 
 const initialState: InitialStateType = {
   error: false,
+  passError: false,
 };
 
 const profileSlice = createSlice({
@@ -48,7 +62,14 @@ const profileSlice = createSlice({
     builder.addCase(changeData.fulfilled, (state: InitialStateType) => {
       state.error = false;
     });
+    builder.addCase(changePassword.rejected, (state: InitialStateType) => {
+      state.error = true;
+    });
+    builder.addCase(changePassword.fulfilled, (state: InitialStateType) => {
+      state.error = false;
+    });
   },
 });
 
 export default profileSlice.reducer;
+export const { removeError } = profileSlice.actions;

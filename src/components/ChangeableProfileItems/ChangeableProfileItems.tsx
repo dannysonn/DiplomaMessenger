@@ -24,6 +24,7 @@ function ChangeableProfileItems({
             type="email"
             className={styles["Changeable-profile__input"]}
             placeholder="programmer2000@yandex.ru"
+            name="email"
             {...register("email")}
           />
         </div>
@@ -40,6 +41,7 @@ function ChangeableProfileItems({
             type="text"
             className={styles["Changeable-profile__input"]}
             placeholder="programmer2000"
+            name="login"
             {...register("login")}
           />
         </div>
@@ -56,12 +58,13 @@ function ChangeableProfileItems({
             type="text"
             className={styles["Changeable-profile__input"]}
             placeholder="Elon"
+            name="first_name"
             {...register("first_name")}
           />
         </div>
-        {errors.name ? (
+        {errors.first_name ? (
           <p className={styles["Changeable-profile__error"]}>
-            {errors.name?.message?.toString()}
+            {errors.first_name?.message?.toString()}
           </p>
         ) : (
           ""
@@ -70,14 +73,15 @@ function ChangeableProfileItems({
           Surname
           <input
             type="text"
+            name="second_name"
             className={styles["Changeable-profile__input"]}
             placeholder="Musk"
             {...register("second_name")}
           />
         </div>
-        {errors.surname ? (
+        {errors.second_name ? (
           <p className={styles["Changeable-profile__error"]}>
-            {errors.surname?.message?.toString()}
+            {errors.second_name?.message?.toString()}
           </p>
         ) : (
           ""
@@ -86,6 +90,7 @@ function ChangeableProfileItems({
           Phone
           <input
             type="phone"
+            name="phone"
             className={styles["Changeable-profile__input"]}
             placeholder="999-99-99"
             {...register("phone")}
@@ -107,16 +112,17 @@ function ChangeableProfileItems({
         <div className={styles["Changeable-profile__item"]}>
           Старый пароль
           <input
+            id="oldPassword"
             type="password"
             className={styles["Changeable-profile__input"]}
             placeholder="********"
             name="oldPassword"
-            {...register("password")}
+            {...register("oldPassword")}
           />
         </div>
-        {errors.password ? (
+        {errors.oldPassword ? (
           <p className={styles["Changeable-profile__error"]}>
-            {errors.password?.message?.toString()}
+            {errors.oldPassword?.message?.toString()}
           </p>
         ) : (
           ""
@@ -124,16 +130,17 @@ function ChangeableProfileItems({
         <div className={styles["Changeable-profile__item"]}>
           Новый пароль
           <input
+            id="newPassword"
             type="password"
             className={styles["Changeable-profile__input"]}
             placeholder="********"
             name="newPassword"
-            {...register("secondPassword")}
+            {...register("newPassword")}
           />
         </div>
-        {errors.secondPassword ? (
+        {errors.newPassword ? (
           <p className={styles["Changeable-profile__error"]}>
-            {errors.secondPassword?.message?.toString()}
+            {errors.newPassword?.message?.toString()}
           </p>
         ) : (
           ""
