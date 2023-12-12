@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./Chat.css";
 
-function Chat() {
+interface ChatProps {
+  content: string;
+  title: string;
+}
+
+function Chat({ content, title }: ChatProps) {
   return (
     <div className={styles.Chat}>
       <img
@@ -10,8 +15,8 @@ function Chat() {
         className={styles.Chat__avatar}
       />
       <div className={styles.Chat__info}>
-        <h3 className={styles.Chat__title}>Chat one</h3>
-        <p className={styles.Chat__message}>Good idea! i like this.</p>
+        <h3 className={styles.Chat__title}>{title}</h3>
+        <p className={styles.Chat__message}>{content}</p>
       </div>
     </div>
   );

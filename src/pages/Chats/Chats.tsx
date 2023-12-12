@@ -9,15 +9,19 @@ import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/slices/userSlice";
+import { getChats } from "../../redux/slices/chatsSlice";
 
 function Chats() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isAuth = useSelector((state) => state.user.isAuth);
+  const chats = useSelector((state) => state.chats.chats);
 
   useEffect(() => {
     if (!isAuth) {
       navigate("/");
+    } else {
+      dispatch(getChats());
     }
   }, []);
 
@@ -50,14 +54,11 @@ function Chats() {
             </div>
           </form>
           <div className={styles["Chats-sidebar__wrapper"]}>
-            <Chat />
-            <Chat />
-            <Chat />
-            <Chat />
-            <Chat />
-            <Chat />
-            <Chat />
-            <Chat />
+            {chats.map((chat) => {
+              return (
+                <Chat content={chat.last_message.content} title={chat.title} />
+              );
+            })}
           </div>
 
           <footer className={styles["Chats-sidebar__footer"]}>
