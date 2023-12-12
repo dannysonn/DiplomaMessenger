@@ -7,7 +7,7 @@ import { changeAvatar } from "../../redux/slices/profileSlice";
 
 function ProfileAvatar() {
   const imageRef = useRef(null);
-  const formRef = useRef(null);
+  const hiddenBtnRef = useRef(null);
   const dispatch = useAppDispatch();
 
   const onSubmit = (data) => {
@@ -22,7 +22,7 @@ function ProfileAvatar() {
 
   return (
     <div className={styles["Profile-avatar"]}>
-      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="avatar" ref={imageRef}>
           <img
             className={styles["Profile-avatar__image"]}
@@ -39,15 +39,18 @@ function ProfileAvatar() {
           type="file"
           id="avatar"
           name="avatar"
-          accept="image/png, image/jpeg"
-          {...register("avatar")}
+          {...register("avatar", {
+            onChange: () => {
+              hiddenBtnRef.current.click();
+            },
+          })}
         />
-        <button type="submit">submit</button>
+        <button type="submit" style={{ display: "none" }} ref={hiddenBtnRef} />
         <div
           className={styles["Profile-avatar__overlay"]}
           onClick={() => imageRef.current.click()}
         >
-          <div className={styles["Profile-avatar__title"]}>change avatar</div>
+          <div className={styles["Profile-avatar__title"]}>сменить аватар</div>
         </div>
       </form>
     </div>
