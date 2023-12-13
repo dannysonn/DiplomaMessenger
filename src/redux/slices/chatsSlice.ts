@@ -39,12 +39,14 @@ type InitialStateType = {
   chats: ChatType[];
   isFetching: boolean;
   showChatsError: boolean;
+  isEmptyChats: boolean;
 };
 
 const initialState: InitialStateType = {
   chats: [],
   isFetching: true,
   showChatsError: false,
+  isEmptyChats: false,
 };
 
 const chatsSlice = createSlice({
@@ -56,6 +58,10 @@ const chatsSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    builder.addCase(getChats.pending, (state: InitialStateType) => {
+      state.isFetching = true;
+      state.showChatsError = false;
+    });
     builder.addCase(getChats.rejected, (state: InitialStateType) => {
       state.isFetching = false;
       state.showChatsError = true;
@@ -63,6 +69,7 @@ const chatsSlice = createSlice({
     builder.addCase(getChats.fulfilled, (state: InitialStateType) => {
       state.isFetching = false;
       state.showChatsError = false;
+      state.isEmptyChats = state.chats.length === 0;
     });
   },
 });

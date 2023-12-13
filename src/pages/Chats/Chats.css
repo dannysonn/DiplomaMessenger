@@ -147,3 +147,27 @@
     display: flex;
     flex-direction: column;
 }
+
+.Chat-content__empty {
+    margin: auto;
+    color: #696969;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+}
+
+.Chats-sidebar__empty {
+    margin: 0;
+    color: #696969;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+}
+
+.Chats-sidebar__loader {
+    margin: 0 auto;
+}

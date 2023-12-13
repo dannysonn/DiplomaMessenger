@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -16,6 +17,8 @@ function Chats() {
   const dispatch = useAppDispatch();
   const isAuth = useSelector((state) => state.user.isAuth);
   const chats = useSelector((state) => state.chats.chats);
+  const isFetching = useSelector((state) => state.chats.isFetching);
+  const isEmptyChats = useSelector((state) => state.chats.isEmptyChats);
 
   useEffect(() => {
     if (!isAuth) {
@@ -35,7 +38,7 @@ function Chats() {
       <div className={globalStyles.Container}>
         <aside className={styles.Chats__sidebar}>
           <header className={styles["Chats-sidebar__header"]}>
-            <h2 className={styles["Chats-sidebar__title"]}>Chats</h2>
+            <h2 className={styles["Chats-sidebar__title"]}>Список чатов</h2>
             <form action="">
               <button
                 className={styles["Chats-sidebar__add-user"]}
@@ -48,11 +51,30 @@ function Chats() {
               <input
                 type="text"
                 id="search-input"
-                placeholder="Search chat"
+                placeholder="Поиск чата"
                 className={styles["Chats-sidebar__search-input"]}
               />
             </div>
           </form>
+
+          {isFetching ? (
+            <CircularProgress
+              className={styles["Chats-sidebar__loader"]}
+              size={40}
+            />
+          ) : (
+            ""
+          )}
+
+          {isEmptyChats ? (
+            <p className={styles["Chats-sidebar__empty"]}>
+              Список чатов пуст, вы можете создать новый чат, нажав на кнопку
+              выше
+            </p>
+          ) : (
+            ""
+          )}
+
           <div className={styles["Chats-sidebar__wrapper"]}>
             {chats.map((chat) => {
               return (
@@ -75,9 +97,17 @@ function Chats() {
           </footer>
         </aside>
         <div className={styles["Chat-content"]}>
-          <ChatHeader />
-          <ChatMessages />
-          <ChatFooter />
+          {isEmptyChats ? (
+            <p className={styles["Chat-content__empty"]}>
+              Выберите чат из списка слева
+            </p>
+          ) : (
+            <div>
+              <ChatHeader />
+              <ChatMessages />
+              <ChatFooter />
+            </div>
+          )}
         </div>
       </div>
     </main>
