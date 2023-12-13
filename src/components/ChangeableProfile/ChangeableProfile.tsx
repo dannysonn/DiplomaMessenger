@@ -118,14 +118,14 @@ function ChangeableProfile({
           type="submit"
           className={styles["Changeable-profile__btn"]}
         >
-          Save
+          Сохранить
         </button>
         <button
           type="button"
           className={styles["Changeable-profile__btn"]}
           onClick={backToProfile}
         >
-          Back to profile
+          Назад к профилю
         </button>
       </div>
     </>

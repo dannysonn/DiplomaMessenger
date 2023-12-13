@@ -19,7 +19,7 @@ function ChangeableProfileItems({
     return (
       <>
         <div className={styles["Changeable-profile__item"]}>
-          Email
+          Почта
           <input
             type="email"
             className={styles["Changeable-profile__input"]}
@@ -36,7 +36,7 @@ function ChangeableProfileItems({
           ""
         )}
         <div className={styles["Changeable-profile__item"]}>
-          Login
+          Логин
           <input
             type="text"
             className={styles["Changeable-profile__input"]}
@@ -53,7 +53,7 @@ function ChangeableProfileItems({
           ""
         )}
         <div className={styles["Changeable-profile__item"]}>
-          Name
+          Имя
           <input
             type="text"
             className={styles["Changeable-profile__input"]}
@@ -70,7 +70,7 @@ function ChangeableProfileItems({
           ""
         )}
         <div className={styles["Changeable-profile__item"]}>
-          Surname
+          Фамилия
           <input
             type="text"
             name="second_name"
@@ -87,7 +87,7 @@ function ChangeableProfileItems({
           ""
         )}
         <div className={styles["Changeable-profile__item"]}>
-          Phone
+          Телефон
           <input
             type="phone"
             name="phone"

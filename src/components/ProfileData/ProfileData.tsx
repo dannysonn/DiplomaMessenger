@@ -25,23 +25,23 @@ function ProfileData({
       <div className={styles["Profile-data"]}>
         <div className={styles["Profile-data__items"]}>
           <div className={styles["Profile-data__item"]}>
-            <span>Email</span>
+            <span>Почта</span>
             <span>{user?.email}</span>
           </div>
           <div className={styles["Profile-data__item"]}>
-            <span>Login</span>
+            <span>Логин</span>
             <span>{user.login}</span>
           </div>
           <div className={styles["Profile-data__item"]}>
-            <span>Name</span>
+            <span>Имя</span>
             <span>{user.first_name}</span>
           </div>
           <div className={styles["Profile-data__item"]}>
-            <span>Surname</span>
+            <span>Фамилия</span>
             <span>{user.second_name}</span>
           </div>
           <div className={styles["Profile-data__item"]}>
-            <span>Phone</span>
+            <span>Телефон</span>
             <span>{user.phone}</span>
           </div>
         </div>
@@ -51,21 +51,21 @@ function ProfileData({
             className={styles["Profile-data__btn"]}
             onClick={handleDataChange}
           >
-            Change data
+            Поменять данные
           </button>
           <button
             type="button"
             className={styles["Profile-data__btn"]}
             onClick={handlePasswordChange}
           >
-            Change password
+            Поменять пароль
           </button>
           <button
             type="button"
             className={`${styles["Profile-data__btn"]} ${styles["Profile-data__btn--red"]}`}
             onClick={navigateToAuth}
           >
-            Log out
+            Выйти
           </button>
         </div>
       </div>
