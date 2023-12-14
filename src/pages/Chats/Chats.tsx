@@ -11,6 +11,7 @@ import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/slices/userSlice";
 import { getChats } from "../../redux/slices/chatsSlice";
+import ModalUnstyled from "../../components/ModalUnstyled/ModalUnstyled";
 
 function Chats() {
   const navigate = useNavigate();
@@ -39,12 +40,7 @@ function Chats() {
         <aside className={styles.Chats__sidebar}>
           <header className={styles["Chats-sidebar__header"]}>
             <h2 className={styles["Chats-sidebar__title"]}>Список чатов</h2>
-            <form action="">
-              <button
-                className={styles["Chats-sidebar__add-user"]}
-                type="submit"
-              />
-            </form>
+            <ModalUnstyled />
           </header>
           <form action="" className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>

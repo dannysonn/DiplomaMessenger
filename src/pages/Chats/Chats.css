@@ -42,7 +42,7 @@
     line-height: normal;
 }
 
-.Chats-sidebar__add-user {
+.Chats-sidebar__add-chat {
     width: 37px;
     height: 37px;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='37' height='37' viewBox='0 0 37 37' fill='none'%3E%3Cpath d='M12.25 18.4167H24.5833M18.4167 24.5833V12.25M13.7917 33.8333H23.0417C30.75 33.8333 33.8333 30.75 33.8333 23.0417V13.7917C33.8333 6.08333 30.75 3 23.0417 3H13.7917C6.08333 3 3 6.08333 3 13.7917V23.0417C3 30.75 6.08333 33.8333 13.7917 33.8333Z' stroke='%23212121' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
