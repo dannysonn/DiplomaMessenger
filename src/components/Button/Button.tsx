@@ -6,7 +6,7 @@ interface ButtonProps {
   form?: string;
   cssModifier?: string;
   additionalClass?: string;
-  text: string;
+  text?: string;
 }
 
 function Button({

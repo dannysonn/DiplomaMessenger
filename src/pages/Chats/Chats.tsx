@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -10,8 +11,13 @@ import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/slices/userSlice";
-import { getChats } from "../../redux/slices/chatsSlice";
-import ModalUnstyled from "../../components/ModalUnstyled/ModalUnstyled";
+import {
+  createChat,
+  CreateChatData,
+  getChats,
+} from "../../redux/slices/chatsSlice";
+import { CustomModal } from "../../components/CustomModal/CustomModal";
+import Button from "../../components/Button/Button";
 
 function Chats() {
   const navigate = useNavigate();
@@ -20,6 +26,9 @@ function Chats() {
   const chats = useSelector((state) => state.chats.chats);
   const isFetching = useSelector((state) => state.chats.isFetching);
   const isEmptyChats = useSelector((state) => state.chats.isEmptyChats);
+  const [isOpen, setOpen] = React.useState(false);
+
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     if (!isAuth) {
@@ -29,9 +38,20 @@ function Chats() {
     }
   }, []);
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleLogout = async () => {
     await dispatch(logout());
     navigate("/");
+  };
+
+  const onSubmit: SubmitHandler<any> = (data: CreateChatData) => {
+    dispatch(createChat(data))
+      .unwrap()
+      .then(() => {
+        dispatch(getChats());
+      });
   };
 
   return (
@@ -40,9 +60,33 @@ function Chats() {
         <aside className={styles.Chats__sidebar}>
           <header className={styles["Chats-sidebar__header"]}>
             <h2 className={styles["Chats-sidebar__title"]}>Список чатов</h2>
-            <ModalUnstyled />
+            <button
+              className={styles["Chats-sidebar__add-chat"]}
+              type="submit"
+              onClick={handleOpen}
+            />
+            <CustomModal handleClose={handleClose} isOpen={isOpen}>
+              <div>
+                <h2 id="unstyled-modal-title" className="modal-title">
+                  Введите название чата
+                </h2>
+                <form
+                  className={styles["Modal-add-chat__form"]}
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <input
+                    id="unstyled-modal-description"
+                    type="text"
+                    className={styles["Modal-unstyled__input"]}
+                    placeholder="название чата"
+                    {...register("title")}
+                  />
+                  <Button type="submit" text="Создать чат" />
+                </form>
+              </div>
+            </CustomModal>
           </header>
-          <form action="" className="Chats-sidebar__search">
+          <form className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>
               <input
                 type="text"
@@ -52,15 +96,6 @@ function Chats() {
               />
             </div>
           </form>
-
-          {isFetching ? (
-            <CircularProgress
-              className={styles["Chats-sidebar__loader"]}
-              size={40}
-            />
-          ) : (
-            ""
-          )}
 
           {isEmptyChats ? (
             <p className={styles["Chats-sidebar__empty"]}>
@@ -72,11 +107,23 @@ function Chats() {
           )}
 
           <div className={styles["Chats-sidebar__wrapper"]}>
-            {chats.map((chat) => {
-              return (
-                <Chat content={chat.last_message.content} title={chat.title} />
-              );
-            })}
+            {isFetching ? (
+              <CircularProgress
+                className={styles["Chats-sidebar__loader"]}
+                size={40}
+              />
+            ) : (
+              chats.map((chat) => {
+                return (
+                  <Chat
+                    content={
+                      chat.last_message ? chat.last_message : "Нет сообщений"
+                    }
+                    title={chat.title}
+                  />
+                );
+              })
+            )}
           </div>
 
           <footer className={styles["Chats-sidebar__footer"]}>
@@ -98,7 +145,7 @@ function Chats() {
               Выберите чат из списка слева
             </p>
           ) : (
-            <div>
+            <div className={styles["Chat-content__container"]}>
               <ChatHeader />
               <ChatMessages />
               <ChatFooter />

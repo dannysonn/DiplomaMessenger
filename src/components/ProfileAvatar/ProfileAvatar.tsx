@@ -41,14 +41,14 @@ function ProfileAvatar() {
           name="avatar"
           {...register("avatar", {
             onChange: () => {
-              hiddenBtnRef.current.click();
+              hiddenBtnRef.current!.click();
             },
           })}
         />
         <button type="submit" style={{ display: "none" }} ref={hiddenBtnRef} />
         <div
           className={styles["Profile-avatar__overlay"]}
-          onClick={() => imageRef.current.click()}
+          onClick={() => imageRef.current!.click()}
         >
           <div className={styles["Profile-avatar__title"]}>сменить аватар</div>
         </div>

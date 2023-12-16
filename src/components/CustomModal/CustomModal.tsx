@@ -2,7 +2,7 @@ import * as React from "react";
 import clsx from "clsx";
 import { styled, css } from "@mui/system";
 import { Modal as BaseModal } from "@mui/base/Modal";
-import styles from "../../pages/Chats/Chats.css";
+import { ReactElement } from "react";
 
 const Backdrop = React.forwardRef<
   HTMLDivElement,
@@ -82,35 +82,27 @@ const ModalContent = styled("div")(
   `,
 );
 
-export default function ModalUnstyled() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+interface CustomModalProps {
+  handleClose: () => void;
+  isOpen: boolean;
+  children: ReactElement;
+}
 
+export function CustomModal({
+  handleClose,
+  isOpen,
+  children,
+}: CustomModalProps) {
   return (
     <div>
-      <button
-        className={styles["Chats-sidebar__add-chat"]}
-        type="submit"
-        onClick={handleOpen}
-      />
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
-        open={open}
+        open={isOpen}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}
       >
-        <ModalContent sx={{ width: 400 }}>
-          <h2 id="unstyled-modal-title" className="modal-title">
-            Введите название чата
-          </h2>
-          <input
-            id="unstyled-modal-description"
-            type="text"
-            className={styles["Modal-unstyled"]}
-          />
-        </ModalContent>
+        <ModalContent sx={{ width: 400 }}>{children}</ModalContent>
       </Modal>
     </div>
   );
