@@ -4,11 +4,12 @@ import styles from "./Chat.css";
 interface ChatProps {
   content: string;
   title: string;
+  clickHandler: () => void;
 }
 
-function Chat({ content, title }: ChatProps) {
+function Chat({ content, title, clickHandler }: ChatProps) {
   return (
-    <div className={styles.Chat}>
+    <div className={styles.Chat} onClick={() => clickHandler()}>
       <img
         src="../../assets/images/svg/woman-placeholder.svg"
         alt="avatar"

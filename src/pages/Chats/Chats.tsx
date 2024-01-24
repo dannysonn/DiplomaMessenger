@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
@@ -32,9 +32,11 @@ function Chats() {
   const isEmptyChats = useSelector(
     (state: IChatState) => state.chatsState.isEmptyChats,
   );
+  const [isChatSelected, setIsChatSelected] = useState(false);
   const [isOpen, setOpen] = React.useState(false);
-
   const { register, handleSubmit } = useForm();
+
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     if (!isAuth) {
@@ -59,6 +61,12 @@ function Chats() {
         dispatch(getChats());
       });
   };
+
+  const filteredChats = useMemo(() => {
+    return chats.filter((chat) => {
+      return chat.title.toLowerCase().includes(filter.toLowerCase());
+    });
+  }, [chats, filter]);
 
   return (
     <main className={styles.Chats}>
@@ -93,25 +101,18 @@ function Chats() {
             </CustomModal>
           </header>
           <h4 style={{ margin: 0 }}>Ваш id: {userId}</h4>
-          <form className="Chats-sidebar__search">
+          <div className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>
               <input
                 type="text"
                 id="search-input"
                 placeholder="Поиск чата"
                 className={styles["Chats-sidebar__search-input"]}
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
               />
             </div>
-          </form>
-
-          {isEmptyChats ? (
-            <p className={styles["Chats-sidebar__empty"]}>
-              Список чатов пуст, вы можете создать новый чат, нажав на кнопку
-              выше
-            </p>
-          ) : (
-            ""
-          )}
+          </div>
 
           <div className={styles["Chats-sidebar__wrapper"]}>
             {isFetching ? (
@@ -119,10 +120,18 @@ function Chats() {
                 className={styles["Chats-sidebar__loader"]}
                 size={40}
               />
+            ) : isEmptyChats ? (
+              <p className={styles["Chats-sidebar__empty"]}>
+                Список чатов пуст, вы можете создать новый чат, нажав на кнопку
+                выше
+              </p>
             ) : (
-              chats.map((chat: any) => {
+              filteredChats.map((chat: any) => {
                 return (
                   <Chat
+                    clickHandler={() => {
+                      setIsChatSelected(true);
+                    }}
                     key={chat.title}
                     content={
                       chat.last_message ? chat.last_message : "Нет сообщений"
@@ -148,7 +157,7 @@ function Chats() {
           </footer>
         </aside>
         <div className={styles["Chat-content"]}>
-          {isEmptyChats ? (
+          {!isChatSelected ? (
             <p className={styles["Chat-content__empty"]}>
               Выберите чат из списка слева
             </p>

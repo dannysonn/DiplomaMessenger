@@ -74,7 +74,7 @@ const chatsSlice = createSlice({
     builder.addCase(getChats.fulfilled, (state: InitialStateType, action) => {
       state.isFetching = false;
       state.showChatsError = false;
-      state.isEmptyChats = action.payload === 0;
+      state.isEmptyChats = state.chats.length === 0;
       if (action.payload) {
         state.chats = action.payload;
       }
