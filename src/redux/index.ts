@@ -8,8 +8,8 @@ export const store = configureStore({
   reducer: combineReducers({
     auth: authSlice,
     profile: profileSlice,
-    user: userSlice,
-    chats: chatsSlice,
+    person: userSlice,
+    chatsState: chatsSlice,
   }),
 });
 

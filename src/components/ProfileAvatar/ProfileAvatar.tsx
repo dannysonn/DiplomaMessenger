@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import styles from "../../pages/Profile/Profile.css";
 import { useAppDispatch } from "../../redux/hooks";
 import { changeAvatar } from "../../redux/slices/profileSlice";
+import { IPersonState } from "../../redux/slices/userSlice";
 
 function ProfileAvatar() {
   const imageRef = useRef(null);
   const hiddenBtnRef = useRef(null);
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     const file = data.avatar[0];
     const formData = new FormData();
     formData.append("avatar", file);
@@ -18,7 +19,9 @@ function ProfileAvatar() {
   };
 
   const { register, handleSubmit } = useForm();
-  const avatar = useSelector((state) => state.user.user?.avatar);
+  const avatar = useSelector(
+    (state: IPersonState) => state.person.user?.avatar,
+  );
 
   return (
     <div className={styles["Profile-avatar"]}>

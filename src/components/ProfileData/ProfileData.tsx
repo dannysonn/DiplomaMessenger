@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import styles from "./ProfileData.css";
+import { IPersonState } from "../../redux/slices/userSlice";
 
 interface ProfileDataProps {
   handleDataChange: MouseEventHandler<HTMLButtonElement>;
@@ -14,7 +15,7 @@ function ProfileData({
   handlePasswordChange,
 }: ProfileDataProps) {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state: IPersonState) => state.person.user);
 
   const navigateToAuth = () => {
     navigate("/");

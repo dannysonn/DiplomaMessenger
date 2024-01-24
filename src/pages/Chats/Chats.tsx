@@ -10,11 +10,12 @@ import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
-import { logout } from "../../redux/slices/userSlice";
+import { IPersonState, logout } from "../../redux/slices/userSlice";
 import {
   createChat,
   CreateChatData,
   getChats,
+  IChatState,
 } from "../../redux/slices/chatsSlice";
 import { CustomModal } from "../../components/CustomModal/CustomModal";
 import Button from "../../components/Button/Button";
@@ -22,10 +23,15 @@ import Button from "../../components/Button/Button";
 function Chats() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isAuth = useSelector((state) => state.user.isAuth);
-  const chats = useSelector((state) => state.chats.chats);
-  const isFetching = useSelector((state) => state.chats.isFetching);
-  const isEmptyChats = useSelector((state) => state.chats.isEmptyChats);
+  const isAuth = useSelector((state: IPersonState) => state.person.isAuth);
+  const userId = useSelector((state: IPersonState) => state.person.user.id);
+  const chats = useSelector((state: IChatState) => state.chatsState.chats);
+  const isFetching = useSelector(
+    (state: IChatState) => state.chatsState.isFetching,
+  );
+  const isEmptyChats = useSelector(
+    (state: IChatState) => state.chatsState.isEmptyChats,
+  );
   const [isOpen, setOpen] = React.useState(false);
 
   const { register, handleSubmit } = useForm();
@@ -86,6 +92,7 @@ function Chats() {
               </div>
             </CustomModal>
           </header>
+          <h4 style={{ margin: 0 }}>Ваш id: {userId}</h4>
           <form className="Chats-sidebar__search">
             <div className={styles["Chats-sidebar__search-input-container"]}>
               <input
@@ -113,9 +120,10 @@ function Chats() {
                 size={40}
               />
             ) : (
-              chats.map((chat) => {
+              chats.map((chat: any) => {
                 return (
                   <Chat
+                    key={chat.title}
                     content={
                       chat.last_message ? chat.last_message : "Нет сообщений"
                     }

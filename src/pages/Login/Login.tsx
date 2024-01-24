@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "../../App.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
+import { IPersonState } from "../../redux/slices/userSlice";
 
 function Login() {
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const isAuth = useSelector((state: IPersonState) => state.person.isAuth);
   const navigate = useNavigate();
 
   useEffect(() => {

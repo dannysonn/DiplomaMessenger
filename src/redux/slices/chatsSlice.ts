@@ -38,6 +38,10 @@ type ChatType = {
   last_message: string;
 };
 
+export interface IChatState {
+  chatsState: InitialStateType;
+}
+
 type InitialStateType = {
   chats: ChatType[];
   isFetching: boolean;
@@ -53,7 +57,7 @@ const initialState: InitialStateType = {
 };
 
 const chatsSlice = createSlice({
-  name: "chats",
+  name: "chatsState",
   initialState,
   reducers: {
     removeError() {},

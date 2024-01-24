@@ -5,9 +5,11 @@ import globalStyles from "../../App.css";
 import styles from "./Profile.css";
 import ProfileContent from "../../components/ProfileContent/ProfileContent";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
+import { IPersonState } from "../../redux/slices/userSlice";
 
 function Profile() {
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const isAuth = useSelector((state: IPersonState) => state.person.isAuth);
+  const userId = useSelector((state: IPersonState) => state.person.user.id);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +28,7 @@ function Profile() {
 
         <div className={styles["Profile-content__container"]}>
           <ProfileAvatar />
+          <h3>Ваш id: {userId}</h3>
           <ProfileContent />
         </div>
       </div>

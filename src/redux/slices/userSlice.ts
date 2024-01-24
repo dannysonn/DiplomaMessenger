@@ -24,7 +24,11 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   return response.data;
 });
 
-type InitialStateType = {
+export interface IPersonState {
+  person: UserStateType;
+}
+
+export type UserStateType = {
   isAuth: boolean;
   user: UserData;
 };
@@ -40,7 +44,7 @@ export type UserData = {
   phone: string;
 };
 
-const initialState: InitialStateType = {
+const initialState: UserStateType = {
   isAuth: false,
   user: {
     id: null,
@@ -55,7 +59,7 @@ const initialState: InitialStateType = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: "person",
   initialState,
   reducers: {
     removeError(state) {
@@ -63,17 +67,14 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUser.fulfilled, (state: InitialStateType, action) => {
+    builder.addCase(getUser.fulfilled, (state: UserStateType, action) => {
       state.isAuth = true;
       state.user = action.payload as UserData;
     });
-    builder.addCase(
-      changeAvatar.fulfilled,
-      (state: InitialStateType, action) => {
-        state.user = action.payload as UserData;
-      },
-    );
-    builder.addCase(logout.fulfilled, (state: InitialStateType) => {
+    builder.addCase(changeAvatar.fulfilled, (state: UserStateType, action) => {
+      state.user = action.payload as UserData;
+    });
+    builder.addCase(logout.fulfilled, (state: UserStateType) => {
       state.isAuth = false;
     });
   },

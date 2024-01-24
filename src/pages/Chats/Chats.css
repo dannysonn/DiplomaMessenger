@@ -74,7 +74,7 @@
 
 .Chats-sidebar__search-input-container {
     position: relative;
-    margin: 37px 0 49px;
+    margin: 20px 0;
 }
 
 .Chats-sidebar__search-input-container::before {
