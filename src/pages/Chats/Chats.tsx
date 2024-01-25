@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { TimeoutId } from "@reduxjs/toolkit/dist/query/core/buildMiddleware/types";
 import styles from "./Chats.css";
 import globalStyles from "../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -17,6 +18,7 @@ import {
   getChats,
   getChatToken,
   IChatState,
+  updateLastMessage,
 } from "../../redux/slices/chatsSlice";
 import { CustomModal } from "../../components/CustomModal/CustomModal";
 import Button from "../../components/Button/Button";
@@ -43,12 +45,33 @@ function Chats() {
   const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate("/");
-    } else {
-      dispatch(getChats());
-    }
-  }, []);
+    let timeoutId: TimeoutId;
+
+    const fetchData = async () => {
+      if (!isAuth) {
+        navigate("/");
+        return;
+      }
+
+      const fetchChats = async () => {
+        try {
+          await dispatch(getChats());
+        } catch (error) {
+          console.error("Error fetching chats", error);
+        }
+
+        timeoutId = setTimeout(fetchChats, 10000);
+      };
+
+      fetchChats();
+    };
+
+    fetchData();
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [dispatch, isAuth, navigate]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,20 +96,33 @@ function Chats() {
   }, [chats, filter]);
 
   const openSocketConnection = (chatId: number, token: string) => {
+    if (currentSocket) {
+      currentSocket.close();
+    }
+
     const socket = new WebSocket(
       `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`,
     );
 
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
+
+      socket.send(
+        JSON.stringify({
+          content: "0",
+          type: "get old",
+        }),
+      );
     });
 
     setInterval(() => {
-      socket.send(
-        JSON.stringify({
-          type: "ping",
-        }),
-      );
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send(
+          JSON.stringify({
+            type: "ping",
+          }),
+        );
+      }
     }, 2000);
 
     socket.addEventListener("close", (event) => {
@@ -100,12 +136,19 @@ function Chats() {
     });
 
     socket.addEventListener("message", (event) => {
-      console.log("Получены данные", event.data);
+      console.log("Получены данные", JSON.parse(event.data));
+      const messageData = JSON.parse(event.data);
+      const messageContent = JSON.parse(event.data).content;
+
       if (JSON.parse(event.data).type !== "pong") {
+        const sortedMessageData = messageData.sort(
+          (a: any, b: any) => b.id - a.id,
+        );
         setMessages((currentMessages) => [
           ...currentMessages,
-          JSON.parse(event.data),
+          ...sortedMessageData,
         ]);
+        dispatch(updateLastMessage({ chatId, messageContent }));
       }
     });
 
@@ -181,7 +224,6 @@ function Chats() {
                   <Chat
                     clickHandler={() => {
                       setMessages([]);
-                      currentSocket?.close();
 
                       dispatch(getChatToken(chat.id))
                         .unwrap()
@@ -197,7 +239,11 @@ function Chats() {
                       setChatHeaderImg(chat.avatar);
                     }}
                     key={chat.title}
-                    content="Нет сообщений"
+                    content={
+                      chat.last_message.content
+                        ? chat.last_message.content
+                        : "Нет сообщений"
+                    }
                     title={chat.title}
                   />
                 );

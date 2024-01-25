@@ -16,7 +16,6 @@ export const getChats = createAsyncThunk(
     }
   },
 );
-
 export const createChat = createAsyncThunk(
   "chats/createChar",
   async (data: CreateChatData, { rejectWithValue }) => {
@@ -63,6 +62,7 @@ type InitialStateType = {
   showChatsError: boolean;
   isEmptyChats: boolean;
   token: null | number;
+  isChatsLoaded: boolean;
 };
 
 const initialState: InitialStateType = {
@@ -71,17 +71,29 @@ const initialState: InitialStateType = {
   showChatsError: false,
   isEmptyChats: false,
   token: null,
+  isChatsLoaded: false,
 };
 
 const chatsSlice = createSlice({
   name: "chatsState",
   initialState,
   reducers: {
-    removeError() {},
+    updateLastMessage(state: InitialStateType, action) {
+      const { chatId, messageContent } = action.payload;
+      const chatToUpdate = state.chats.find((chat) => chat.id === chatId);
+
+      if (chatToUpdate) {
+        chatToUpdate.last_message.content = messageContent;
+      }
+    },
   },
   extraReducers(builder) {
     builder.addCase(getChats.pending, (state: InitialStateType) => {
-      state.isFetching = true;
+      if (!state.isChatsLoaded) {
+        state.isFetching = true;
+      }
+
+      state.isChatsLoaded = true;
       state.showChatsError = false;
     });
     builder.addCase(getChats.rejected, (state: InitialStateType) => {
@@ -113,3 +125,4 @@ const chatsSlice = createSlice({
 });
 
 export default chatsSlice.reducer;
+export const { updateLastMessage } = chatsSlice.actions;
