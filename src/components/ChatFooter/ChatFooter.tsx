@@ -11,10 +11,7 @@ function ChatFooter({ socket }: ChatFooterProps) {
 
   return (
     <footer className={styles["Chat-footer"]}>
-      <Button
-        type="button"
-        additionalClass={styles["Chat-footer__load-image"]}
-      />
+      <button type="submit" className={styles["Chat-footer__load-image"]} />
       <form
         style={{ width: "100%", display: "flex" }}
         onSubmit={(event) => {
