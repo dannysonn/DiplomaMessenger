@@ -41,13 +41,16 @@ export const getChatToken = createAsyncThunk(
   },
 );
 
-type ChatType = {
+export type ChatType = {
   id: number;
   title: string;
   avatar: null | string;
   created_by: number;
   unread_count: number;
-  last_message: string;
+  last_message: {
+    content: string;
+    time: string;
+  };
 };
 
 export interface IChatState {

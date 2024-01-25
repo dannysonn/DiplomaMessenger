@@ -22,6 +22,14 @@
 }
 
 .Chat-header__add-user {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 10px;
+}
+
+.Chat-header__add-user::after {
+    content: "";
     width: 23px;
     height: 23px;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 23 23' fill='none'%3E%3Ccircle cx='11.25' cy='11.25' r='10.5' stroke='black' stroke-width='1.5'/%3E%3Cline x1='11.233' y1='5.625' x2='11.233' y2='16.875' stroke='black' stroke-width='1.5'/%3E%3Cline x1='5.625' y1='11.2671' x2='16.875' y2='11.2671' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center/contain;

@@ -6,9 +6,10 @@
 
 .Message__text {
     max-width: 350px;
-    display: flex;
-    align-items: center;
+    height: fit-content;
     padding: 10px 20px;
+    overflow: hidden;
+    word-wrap: break-word;
     margin: 0;
     border-radius: 30px;
     color: #FFF;
