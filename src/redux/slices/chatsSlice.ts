@@ -29,6 +29,18 @@ export const createChat = createAsyncThunk(
   },
 );
 
+export const getChatToken = createAsyncThunk(
+  "chats/token",
+  async (chatId: number, { rejectWithValue }) => {
+    try {
+      const response = await ChatsApi.getToken(chatId);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
 type ChatType = {
   id: number;
   title: string;
@@ -47,6 +59,7 @@ type InitialStateType = {
   isFetching: boolean;
   showChatsError: boolean;
   isEmptyChats: boolean;
+  token: null | number;
 };
 
 const initialState: InitialStateType = {
@@ -54,6 +67,7 @@ const initialState: InitialStateType = {
   isFetching: true,
   showChatsError: false,
   isEmptyChats: false,
+  token: null,
 };
 
 const chatsSlice = createSlice({
@@ -86,6 +100,12 @@ const chatsSlice = createSlice({
       state.isEmptyChats = false;
       state.isFetching = false;
     });
+    builder.addCase(
+      getChatToken.fulfilled,
+      (state: InitialStateType, action) => {
+        state.token = action.payload.token;
+      },
+    );
   },
 });
 

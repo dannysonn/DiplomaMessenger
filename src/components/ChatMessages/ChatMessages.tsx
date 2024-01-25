@@ -1,80 +1,53 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./ChatMessages.css";
 import Message from "../Message/Message";
 
-function ChatMessages() {
+interface ChatMessagesProps {
+  messages: any;
+  userId: number | null;
+}
+
+export interface IMessage {
+  content: string;
+  type: string;
+  time: string;
+  user_id: number;
+  id: number;
+}
+
+function ChatMessages({ messages, userId }: ChatMessagesProps) {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollToBottom = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className={styles["Chat-messages"]}>
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hello. Mrs. Lilly, i have a good idea how to create a music with help of our team. Can we meet up tomorrow near the bar to talk?"
-        modifierCss="Message--incoming"
-      />
-      <Message
-        src="https://placehold.co/50x50"
-        text="Hi, Mrs. Lilly"
-        modifierCss="Message--sent"
-      />
+      {messages.map((message: IMessage) => {
+        if (message.user_id === userId) {
+          return (
+            <Message
+              key={message.id}
+              src="https://placehold.co/50x50"
+              text={message.content}
+              modifierCss="Message--sent"
+            />
+          );
+        }
+        return (
+          <Message
+            key={message.id}
+            src="https://placehold.co/50x50"
+            text={message.content}
+            modifierCss="Message--incoming"
+          />
+        );
+      })}
+      <div ref={scrollRef} />
     </div>
   );
 }

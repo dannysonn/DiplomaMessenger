@@ -1,4 +1,7 @@
 .Chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
     height: calc(100% - 150px);
     padding: 0 30px;

@@ -1,16 +1,21 @@
 import React from "react";
 import styles from "./ChatHeader.css";
 
-function ChatHeader() {
+interface ChatHeaderProps {
+  chatHeaderTitle: string;
+  chatHeaderImg: string | null;
+}
+
+function ChatHeader({ chatHeaderTitle, chatHeaderImg }: ChatHeaderProps) {
   return (
     <header className={styles["Chat-header"]}>
       <div className={styles["Chat-header__info"]}>
         <img
-          src="assets/images/svg/default-chat-img.svg"
+          src={chatHeaderImg || "assets/images/svg/default-chat-img.svg"}
           alt="Chat img"
           className={styles["Chat-header__avatar"]}
         />
-        <h2 className={styles["Chat-header__title"]}>Chat name</h2>
+        <h2 className={styles["Chat-header__title"]}>{chatHeaderTitle}</h2>
       </div>
       <div className={styles["Chat-header__controls"]}>
         <button type="button" className={styles["Chat-header__add-user"]} />

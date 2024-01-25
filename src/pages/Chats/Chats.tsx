@@ -15,6 +15,7 @@ import {
   createChat,
   CreateChatData,
   getChats,
+  getChatToken,
   IChatState,
 } from "../../redux/slices/chatsSlice";
 import { CustomModal } from "../../components/CustomModal/CustomModal";
@@ -35,8 +36,11 @@ function Chats() {
   const [isChatSelected, setIsChatSelected] = useState(false);
   const [isOpen, setOpen] = React.useState(false);
   const { register, handleSubmit } = useForm();
-
   const [filter, setFilter] = useState("");
+  const [chatHeaderTitle, setChatHeaderTitle] = useState("");
+  const [chatHeaderImg, setChatHeaderImg] = useState<string | null>(null);
+  const [currentSocket, setCurrentSocket] = useState<WebSocket | null>(null);
+  const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
     if (!isAuth) {
@@ -67,6 +71,52 @@ function Chats() {
       return chat.title.toLowerCase().includes(filter.toLowerCase());
     });
   }, [chats, filter]);
+
+  const openSocketConnection = (chatId: number, token: string) => {
+    const socket = new WebSocket(
+      `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`,
+    );
+
+    socket.addEventListener("open", () => {
+      console.log("Соединение установлено");
+    });
+
+    setInterval(() => {
+      socket.send(
+        JSON.stringify({
+          type: "ping",
+        }),
+      );
+    }, 2000);
+
+    socket.addEventListener("close", (event) => {
+      if (event.wasClean) {
+        console.log("Соединение закрыто чисто");
+      } else {
+        console.log("Обрыв соединения");
+      }
+
+      console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+    });
+
+    socket.addEventListener("message", (event) => {
+      console.log("Получены данные", event.data);
+      if (JSON.parse(event.data).type !== "pong") {
+        setMessages((currentMessages) => [
+          ...currentMessages,
+          JSON.parse(event.data),
+        ]);
+      }
+    });
+
+    socket.addEventListener("error", (event) => {
+      if (event instanceof ErrorEvent) {
+        console.log("Ошибка", event.message);
+      }
+    });
+
+    return socket;
+  };
 
   return (
     <main className={styles.Chats}>
@@ -126,16 +176,28 @@ function Chats() {
                 выше
               </p>
             ) : (
-              filteredChats.map((chat: any) => {
+              filteredChats.map((chat) => {
                 return (
                   <Chat
                     clickHandler={() => {
+                      setMessages([]);
+                      currentSocket?.close();
+
+                      dispatch(getChatToken(chat.id))
+                        .unwrap()
+                        .then((res) => res)
+                        .then((res) => {
+                          setCurrentSocket(
+                            openSocketConnection(chat.id, res.token),
+                          );
+                        });
+
                       setIsChatSelected(true);
+                      setChatHeaderTitle(chat.title);
+                      setChatHeaderImg(chat.avatar);
                     }}
                     key={chat.title}
-                    content={
-                      chat.last_message ? chat.last_message : "Нет сообщений"
-                    }
+                    content="Нет сообщений"
                     title={chat.title}
                   />
                 );
@@ -163,9 +225,12 @@ function Chats() {
             </p>
           ) : (
             <div className={styles["Chat-content__container"]}>
-              <ChatHeader />
-              <ChatMessages />
-              <ChatFooter />
+              <ChatHeader
+                chatHeaderTitle={chatHeaderTitle}
+                chatHeaderImg={chatHeaderImg}
+              />
+              <ChatMessages messages={messages} userId={userId} />
+              <ChatFooter socket={currentSocket} />
             </div>
           )}
         </div>
