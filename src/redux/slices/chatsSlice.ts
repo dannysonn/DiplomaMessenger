@@ -12,6 +12,7 @@ export const getChats = createAsyncThunk(
       const response = await ChatsApi.getChats();
       return response.data;
     } catch (e) {
+      console.error("Error in getChats async thunk:", e);
       return rejectWithValue(e);
     }
   },
@@ -23,6 +24,7 @@ export const createChat = createAsyncThunk(
       const response = await ChatsApi.createChat(data);
       return response.data;
     } catch (e) {
+      console.error("Error in createChat async thunk:", e);
       return rejectWithValue(e);
     }
   },
@@ -35,6 +37,7 @@ export const getChatToken = createAsyncThunk(
       const response = await ChatsApi.getToken(chatId);
       return response.data;
     } catch (e) {
+      console.error("Error in getChatToken async thunk:", e);
       return rejectWithValue(e);
     }
   },
@@ -52,6 +55,7 @@ export const addUserToChat = createAsyncThunk(
       const response = await ChatsApi.addUser(data);
       return response.data;
     } catch (e) {
+      console.error("Error in addUserToChat async thunk:", e);
       return rejectWithValue(e);
     }
   },
@@ -113,14 +117,16 @@ const chatsSlice = createSlice({
       state.isChatsLoaded = true;
       state.showChatsError = false;
     });
-    builder.addCase(getChats.rejected, (state: InitialStateType) => {
+    builder.addCase(getChats.rejected, (state: InitialStateType, action) => {
       state.isFetching = false;
       state.showChatsError = true;
+      console.error("Rejected action in getChats:", action.payload);
     });
     builder.addCase(getChats.fulfilled, (state: InitialStateType, action) => {
       state.isFetching = false;
       state.showChatsError = false;
       state.isEmptyChats = state.chats.length === 0;
+      console.log(action.payload);
       if (action.payload) {
         state.chats = action.payload;
       }
