@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ChatsApi from "../../API/ChatsApi/ChatsApi";
+import ChatsApi, { AddUserData } from "../../API/ChatsApi/ChatsApi";
 
 export type CreateChatData = {
   title: string;
@@ -33,6 +33,26 @@ export const getChatToken = createAsyncThunk(
   async (chatId: number, { rejectWithValue }) => {
     try {
       const response = await ChatsApi.getToken(chatId);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+export const addUserToChat = createAsyncThunk(
+  "chats/addUser",
+  async ({ userId, chatId }: AddUserData, { rejectWithValue }) => {
+    const data = {
+      users: [userId],
+      chatId,
+    };
+
+    debugger;
+    console.log(data);
+
+    try {
+      const response = await ChatsApi.addUser(data);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -121,6 +141,9 @@ const chatsSlice = createSlice({
         state.token = action.payload.token;
       },
     );
+    builder.addCase(addUserToChat.fulfilled, () => {
+      console.log("пользователь добавлен");
+    });
   },
 });
 

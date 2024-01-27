@@ -36,6 +36,7 @@ function Chats() {
     (state: IChatState) => state.chatsState.isEmptyChats,
   );
   const [isChatSelected, setIsChatSelected] = useState(false);
+  const [selectedChatId, setSelectedChatId] = useState<number | null>(null);
   const [isOpen, setOpen] = React.useState(false);
   const { register, handleSubmit } = useForm();
   const [filter, setFilter] = useState("");
@@ -224,6 +225,7 @@ function Chats() {
                   <Chat
                     clickHandler={() => {
                       setMessages([]);
+                      setSelectedChatId(chat.id);
 
                       dispatch(getChatToken(chat.id))
                         .unwrap()
@@ -272,6 +274,7 @@ function Chats() {
           ) : (
             <div className={styles["Chat-content__container"]}>
               <ChatHeader
+                chatId={selectedChatId}
                 chatHeaderTitle={chatHeaderTitle}
                 chatHeaderImg={chatHeaderImg}
               />

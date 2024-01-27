@@ -1,9 +1,8 @@
 import axios from "axios";
 
-export interface SocketArgs {
+export interface AddUserData {
   userId: string;
-  chatId: string;
-  token: string;
+  chatId: number | null;
 }
 
 class ChatsApi {
@@ -12,15 +11,19 @@ class ChatsApi {
   static axios = axios.create({ withCredentials: true });
 
   public static getChats() {
-    return this.axios.get(`${ChatsApi.baseUrl}/chats`);
+    return this.axios.get(`${ChatsApi.baseUrl}chats`);
   }
 
   public static createChat(data: any) {
-    return this.axios.post(`${ChatsApi.baseUrl}/chats`, data);
+    return this.axios.post(`${ChatsApi.baseUrl}chats`, data);
   }
 
   public static getToken(chatId: number) {
-    return this.axios.post(`${ChatsApi.baseUrl}/chats/token/${chatId}`);
+    return this.axios.post(`${ChatsApi.baseUrl}chats/token/${chatId}`);
+  }
+
+  public static addUser(data: any) {
+    return this.axios.put(`${ChatsApi.baseUrl}chats/users`, data);
   }
 }
 

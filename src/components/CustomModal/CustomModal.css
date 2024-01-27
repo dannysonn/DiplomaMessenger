@@ -1,0 +1,33 @@
+.Custom-modal {
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        input {
+            width: 100%;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 1px solid #212121;
+            padding: 5px;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            appearance: textfield;
+        }
+
+        button {
+            width: 100%;
+            font-size: 14px;
+            font-weight: 700;
+        }
+    }
+}

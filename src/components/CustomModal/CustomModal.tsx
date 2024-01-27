@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { styled, css } from "@mui/system";
 import { Modal as BaseModal } from "@mui/base/Modal";
 import { ReactElement } from "react";
+import styles from "./CustomModal.css";
 
 const Backdrop = React.forwardRef<
   HTMLDivElement,
@@ -83,7 +84,7 @@ const ModalContent = styled("div")(
 );
 
 interface CustomModalProps {
-  handleClose: () => void;
+  handleClose?: () => void;
   isOpen: boolean;
   children: ReactElement;
 }
@@ -96,6 +97,7 @@ export function CustomModal({
   return (
     <div>
       <Modal
+        className={styles["Custom-modal"]}
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={isOpen}
