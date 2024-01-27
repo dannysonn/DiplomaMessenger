@@ -48,9 +48,6 @@ export const addUserToChat = createAsyncThunk(
       chatId,
     };
 
-    debugger;
-    console.log(data);
-
     try {
       const response = await ChatsApi.addUser(data);
       return response.data;
