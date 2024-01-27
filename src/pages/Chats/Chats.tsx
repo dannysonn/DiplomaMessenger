@@ -142,9 +142,12 @@ function Chats() {
       const messageContent = JSON.parse(event.data).content;
 
       if (JSON.parse(event.data).type !== "pong") {
-        const sortedMessageData = messageData.sort(
-          (a: any, b: any) => b.id - a.id,
-        );
+        let sortedMessageData = messageData;
+
+        if (messageData.length > 1 && messageData) {
+          sortedMessageData = messageData.sort((a: any, b: any) => b.id - a.id);
+        }
+
         setMessages((currentMessages) => [
           ...currentMessages,
           ...sortedMessageData,

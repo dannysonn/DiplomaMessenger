@@ -121,9 +121,7 @@ const chatsSlice = createSlice({
       state.isFetching = false;
       state.showChatsError = false;
       state.isEmptyChats = state.chats.length === 0;
-      if (action.payload) {
-        state.chats = action.payload;
-      }
+      state.chats = action.payload;
     });
     builder.addCase(createChat.pending, (state: InitialStateType) => {
       state.isFetching = true;
