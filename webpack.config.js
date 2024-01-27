@@ -31,6 +31,7 @@ module.exports = (env) => {
       filename: "[name].[contenthash].js",
       path: path.resolve(__dirname, "build"),
       clean: true,
+      publicPath: '/',
     },
     resolve: {
       extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
