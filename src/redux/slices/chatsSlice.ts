@@ -103,7 +103,7 @@ const chatsSlice = createSlice({
       const { chatId, messageContent } = action.payload;
       const chatToUpdate = state.chats.find((chat) => chat.id === chatId);
 
-      if (chatToUpdate) {
+      if (chatToUpdate && chatToUpdate.last_message) {
         chatToUpdate.last_message.content = messageContent;
       }
     },

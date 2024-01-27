@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
@@ -84,14 +84,17 @@ function Chats() {
       .unwrap()
       .then(() => {
         dispatch(getChats());
+        setOpen(false);
       });
   };
 
-  const filteredChats = useMemo(() => {
-    return chats.filter((chat) => {
+  let filteredChats = chats;
+
+  if (filter !== "") {
+    filteredChats = chats.filter((chat) => {
       return chat.title.toLowerCase().includes(filter.toLowerCase());
     });
-  }, [chats, filter]);
+  }
 
   const openSocketConnection = (chatId: number, token: string) => {
     if (currentSocket) {
@@ -138,7 +141,10 @@ function Chats() {
       const messageData = JSON.parse(event.data);
       const messageContent = JSON.parse(event.data).content;
 
-      if (JSON.parse(event.data).type !== "pong") {
+      if (
+        JSON.parse(event.data).type !== "pong" &&
+        JSON.parse(event.data).type !== "user connected"
+      ) {
         let sortedMessageData = messageData;
 
         if (Array.isArray(sortedMessageData)) {
@@ -246,7 +252,7 @@ function Chats() {
                       setChatHeaderTitle(chat.title);
                       setChatHeaderImg(chat.avatar);
                     }}
-                    key={chat.title}
+                    key={chat.title + chat.id}
                     content={
                       chat.last_message
                         ? chat.last_message.content

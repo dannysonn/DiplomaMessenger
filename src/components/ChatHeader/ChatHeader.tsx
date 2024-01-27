@@ -63,6 +63,7 @@ function ChatHeader({
                     setTimeout(() => {
                       setShouldShowSuccessAlert(false);
                     }, 3000);
+                    setAddUserModalOpen(false);
                   })
                   .catch(() => {
                     setShouldShowErrorAlert(true);

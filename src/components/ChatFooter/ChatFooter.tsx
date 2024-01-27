@@ -16,12 +16,14 @@ function ChatFooter({ socket }: ChatFooterProps) {
         style={{ width: "100%", display: "flex" }}
         onSubmit={(event) => {
           event.preventDefault();
-          socket?.send(
-            JSON.stringify({
-              content: messageValue,
-              type: "message",
-            }),
-          );
+          if (messageValue !== "") {
+            socket?.send(
+              JSON.stringify({
+                content: messageValue,
+                type: "message",
+              }),
+            );
+          }
           setMessageValue("");
         }}
       >
