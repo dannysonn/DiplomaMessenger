@@ -248,8 +248,10 @@ function Chats() {
                     }}
                     key={chat.title}
                     content={
-                      chat.last_message.content
+                      chat.last_message
                         ? chat.last_message.content
+                          ? chat.last_message.content
+                          : "Нет сообщений"
                         : "Нет сообщений"
                     }
                     title={chat.title}
