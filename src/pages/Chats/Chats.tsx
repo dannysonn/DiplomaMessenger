@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TimeoutId } from "@reduxjs/toolkit/dist/query/core/buildMiddleware/types";
 import styles from "./Chats.css";
-import globalStyles from "../../App.css";
+import globalStyles from "../../../App.css";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";

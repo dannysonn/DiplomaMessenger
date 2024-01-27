@@ -12,7 +12,7 @@ module.exports = (env) => {
   let config = {
     context: path.resolve(__dirname, "src"),
     entry: {
-      index: "./index.tsx",
+      index: "../index.tsx",
     },
     devServer: {
       static: {
@@ -23,7 +23,7 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./index.html",
+        template: "../index.html",
       }),
       new ESLintPlugin(),
     ],

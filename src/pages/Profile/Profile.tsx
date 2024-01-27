@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import globalStyles from "../../App.css";
+import globalStyles from "../../../App.css";
 import styles from "./Profile.css";
 import ProfileContent from "../../components/ProfileContent/ProfileContent";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";

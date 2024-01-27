@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styles from "../../App.css";
+import styles from "../../../App.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
 function Registration() {

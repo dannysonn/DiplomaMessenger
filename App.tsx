@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./pages/Login/Login";
+import Login from "./src/pages/Login/Login";
 import "normalize.css";
 import "./App.css";
-import Registration from "./pages/Registration/Registration";
-import Chats from "./pages/Chats/Chats";
-import Profile from "./pages/Profile/Profile";
-import { getUser } from "./redux/slices/userSlice";
-import { useAppDispatch } from "./redux/hooks";
+import Registration from "./src/pages/Registration/Registration";
+import Chats from "./src/pages/Chats/Chats";
+import Profile from "./src/pages/Profile/Profile";
+import { getUser } from "./src/redux/slices/userSlice";
+import { useAppDispatch } from "./src/redux/hooks";
 
 export default function App() {
   const dispatch = useAppDispatch();
