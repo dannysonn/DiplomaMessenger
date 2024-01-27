@@ -31,9 +31,6 @@ function Chats() {
   const isFetching = useSelector(
     (state: IChatState) => state.chatsState.isFetching,
   );
-  const isEmptyChats = useSelector(
-    (state: IChatState) => state.chatsState.isEmptyChats,
-  );
   const [isChatSelected, setIsChatSelected] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -206,7 +203,7 @@ function Chats() {
                 className={styles["Chats-sidebar__loader"]}
                 size={40}
               />
-            ) : isEmptyChats ? (
+            ) : !chats.length ? (
               <p className={styles["Chats-sidebar__empty"]}>
                 Список чатов пуст, вы можете создать новый чат, нажав на кнопку
                 выше
