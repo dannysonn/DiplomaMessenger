@@ -24,6 +24,7 @@ module.exports = (env) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "../index.html",
+        publicPath: '/DiplomaMessenger/',
       }),
       new ESLintPlugin(),
     ],
