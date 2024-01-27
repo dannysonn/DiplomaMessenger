@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TimeoutId } from "@reduxjs/toolkit/dist/query/core/buildMiddleware/types";
 import styles from "./Chats.css";
 import globalStyles from "../../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -46,32 +45,16 @@ function Chats() {
   const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    let timeoutId: TimeoutId;
+    if (!isAuth) {
+      navigate("/");
+      return;
+    }
 
-    const fetchData = async () => {
-      if (!isAuth) {
-        navigate("/");
-        return;
-      }
-
-      const fetchChats = async () => {
-        try {
-          await dispatch(getChats());
-        } catch (error) {
-          console.error("Error fetching chats", error);
-        }
-
-        timeoutId = setTimeout(fetchChats, 10000);
-      };
-
-      fetchChats();
-    };
-
-    fetchData();
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    try {
+      dispatch(getChats());
+    } catch (error) {
+      console.error("Error fetching chats", error);
+    }
   }, [dispatch, isAuth, navigate]);
 
   const handleOpen = () => setOpen(true);
