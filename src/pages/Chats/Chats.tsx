@@ -144,14 +144,20 @@ function Chats() {
       if (JSON.parse(event.data).type !== "pong") {
         let sortedMessageData = messageData;
 
-        if (messageData.length > 1 && messageData) {
+        if (Array.isArray(sortedMessageData)) {
           sortedMessageData = messageData.sort((a: any, b: any) => b.id - a.id);
+
+          setMessages((currentMessages) => [
+            ...currentMessages,
+            ...sortedMessageData,
+          ]);
+        } else {
+          setMessages((currentMessages) => [
+            ...currentMessages,
+            sortedMessageData,
+          ]);
         }
 
-        setMessages((currentMessages) => [
-          ...currentMessages,
-          ...sortedMessageData,
-        ]);
         dispatch(updateLastMessage({ chatId, messageContent }));
       }
     });
