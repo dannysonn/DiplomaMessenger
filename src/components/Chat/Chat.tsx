@@ -5,9 +5,10 @@ interface ChatProps {
   content: string;
   title: string;
   clickHandler: () => void;
+  unreadCount: number;
 }
 
-function Chat({ content, title, clickHandler }: ChatProps) {
+function Chat({ content, title, clickHandler, unreadCount }: ChatProps) {
   return (
     <div className={styles.Chat} onClick={() => clickHandler()}>
       <img
@@ -17,7 +18,14 @@ function Chat({ content, title, clickHandler }: ChatProps) {
       />
       <div className={styles.Chat__info}>
         <h3 className={styles.Chat__title}>{title}</h3>
-        <p className={styles.Chat__message}>{content}</p>
+        <div className={styles["Chat-message__wrapper"]}>
+          <p className={styles.Chat__message}>{content}</p>
+          {unreadCount > 0 ? (
+            <div className={styles["Chats__unread-count"]}>{unreadCount}</div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

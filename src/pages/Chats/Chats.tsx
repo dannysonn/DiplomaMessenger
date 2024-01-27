@@ -58,7 +58,7 @@ function Chats() {
           console.error("Error fetching chats", error);
         }
 
-        timeoutId = setTimeout(fetchChats, 10000);
+        timeoutId = setTimeout(fetchChats, 3000);
       };
 
       fetchChats();
@@ -253,6 +253,7 @@ function Chats() {
                         : "Нет сообщений"
                     }
                     title={chat.title}
+                    unreadCount={chat.unread_count}
                   />
                 );
               })
