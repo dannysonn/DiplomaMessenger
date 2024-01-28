@@ -2,6 +2,12 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 import styles from "./Chat.css";
+import { useAppDispatch } from "../../redux/hooks";
+import {
+  deleteChat,
+  rerenderChatsAfterDelete,
+} from "../../redux/slices/chatsSlice";
+import { DeleteChatData } from "../../API/ChatsApi/ChatsApi";
 
 interface ChatProps {
   content: string;
@@ -9,6 +15,9 @@ interface ChatProps {
   clickHandler: () => void;
   unreadCount: number;
   isChatSelected: boolean;
+  chatId: number;
+  setShouldShowSuccessAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setShouldShowErrorAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Chat({
@@ -17,7 +26,12 @@ function Chat({
   clickHandler,
   unreadCount,
   isChatSelected,
+  chatId,
+  setShouldShowSuccessAlert,
+  setShouldShowErrorAlert,
 }: ChatProps) {
+  const dispatch = useAppDispatch();
+
   return (
     <div
       className={
@@ -57,6 +71,27 @@ function Chat({
         }}
         onClick={(e) => {
           e.stopPropagation();
+          const deleteChatData: DeleteChatData = {
+            chatId,
+          };
+
+          dispatch(deleteChat(deleteChatData))
+            .unwrap()
+            .then(() => {
+              setShouldShowErrorAlert(false);
+              setShouldShowSuccessAlert(true);
+              setTimeout(() => {
+                setShouldShowSuccessAlert(false);
+              }, 5000);
+              dispatch(rerenderChatsAfterDelete({ chatId }));
+            })
+            .catch(() => {
+              setShouldShowSuccessAlert(false);
+              setShouldShowErrorAlert(true);
+              setTimeout(() => {
+                setShouldShowErrorAlert(false);
+              }, 5000);
+            });
         }}
       >
         <DeleteIcon fontSize="inherit" />

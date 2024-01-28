@@ -5,6 +5,10 @@ export interface AddUserData {
   chatId: number | null;
 }
 
+export interface DeleteChatData {
+  chatId: number;
+}
+
 class ChatsApi {
   static baseUrl = "https://ya-praktikum.tech/api/v2/";
 
@@ -28,6 +32,10 @@ class ChatsApi {
 
   public static getChatUsers(id: number) {
     return this.axios.get(`${ChatsApi.baseUrl}chats/${id}/users`);
+  }
+
+  public static deleteChat(data: DeleteChatData) {
+    return this.axios.delete(`${ChatsApi.baseUrl}chats`, { data });
   }
 }
 

@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ChatsApi, { AddUserData } from "../../API/ChatsApi/ChatsApi";
+import ChatsApi, {
+  AddUserData,
+  DeleteChatData,
+} from "../../API/ChatsApi/ChatsApi";
 
 export type CreateChatData = {
   title: string;
@@ -84,6 +87,19 @@ export const getChatUsersList = createAsyncThunk(
   },
 );
 
+export const deleteChat = createAsyncThunk(
+  "chats/deleteChat",
+  async (data: DeleteChatData, { rejectWithValue }) => {
+    try {
+      const response = await ChatsApi.deleteChat(data);
+      return response.data;
+    } catch (e) {
+      console.error("Error in deleteChat async thunk:", e);
+      return rejectWithValue(e);
+    }
+  },
+);
+
 export type ChatType = {
   id: number;
   title: string;
@@ -132,6 +148,10 @@ const chatsSlice = createSlice({
         chatToUpdate.last_message.content = messageContent;
       }
     },
+    rerenderChatsAfterDelete(state: ChatsStateType, action) {
+      const { chatId } = action.payload;
+      state.chats = state.chats.filter((chat) => chatId !== chat.id);
+    },
   },
   extraReducers(builder) {
     builder.addCase(getChats.pending, (state: ChatsStateType) => {
@@ -148,12 +168,12 @@ const chatsSlice = createSlice({
       console.error("Rejected action in getChats:", action.payload);
     });
     builder.addCase(getChats.fulfilled, (state: ChatsStateType, action) => {
-      state.isFetching = false;
       state.showChatsError = false;
       console.log(action.payload);
       if (action.payload) {
         state.chats = action.payload;
       }
+      state.isFetching = false;
     });
     builder.addCase(createChat.pending, (state: ChatsStateType) => {
       state.isFetching = true;
@@ -177,4 +197,5 @@ const chatsSlice = createSlice({
 });
 
 export default chatsSlice.reducer;
-export const { updateLastMessage } = chatsSlice.actions;
+export const { updateLastMessage, rerenderChatsAfterDelete } =
+  chatsSlice.actions;

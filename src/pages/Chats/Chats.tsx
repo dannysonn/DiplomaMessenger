@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { TimeoutId } from "@reduxjs/toolkit/dist/query/core/buildMiddleware/types";
+import Alert from "@mui/material/Alert";
 import styles from "./Chats.css";
 import globalStyles from "../../../App.css";
 import Chat from "../../components/Chat/Chat";
@@ -15,7 +15,6 @@ import { IPersonState, logout } from "../../redux/slices/userSlice";
 import {
   ChatType,
   createChat,
-  CreateChatData,
   getChats,
   getChatToken,
   getChatUsersList,
@@ -37,12 +36,14 @@ function Chats() {
   const [isChatSelected, setIsChatSelected] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null);
   const [isOpen, setOpen] = React.useState(false);
-  const { register, handleSubmit } = useForm();
   const [filter, setFilter] = useState("");
   const [chatHeaderTitle, setChatHeaderTitle] = useState("");
   const [chatHeaderImg, setChatHeaderImg] = useState<string | null>(null);
   const [currentSocket, setCurrentSocket] = useState<WebSocket | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
+  const [shouldShowSuccessAlert, setShouldShowSuccessAlert] = useState(false);
+  const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState(false);
+  const [newChatName, setNewChatName] = useState("");
 
   useEffect(() => {
     let timeoutId: TimeoutId;
@@ -60,7 +61,7 @@ function Chats() {
           console.error("Error fetching chats", error);
         }
 
-        timeoutId = setTimeout(fetchChats, 3000);
+        // timeoutId = setTimeout(fetchChats, 3000);
       };
 
       fetchChats();
@@ -81,12 +82,11 @@ function Chats() {
     navigate("/");
   };
 
-  const onSubmit: SubmitHandler<any> = (data: CreateChatData) => {
-    dispatch(createChat(data))
+  const onSubmit = () => {
+    dispatch(createChat({ title: newChatName }))
       .unwrap()
       .then(() => {
         dispatch(getChats());
-        setOpen(false);
       });
   };
 
@@ -203,14 +203,22 @@ function Chats() {
                 </h2>
                 <form
                   className={styles["Modal-add-chat__form"]}
-                  onSubmit={handleSubmit(onSubmit)}
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    setOpen(false);
+                    setNewChatName("");
+                    onSubmit();
+                  }}
                 >
                   <input
                     id="unstyled-modal-description"
                     type="text"
                     className={styles["Modal-unstyled__input"]}
                     placeholder="название чата"
-                    {...register("title")}
+                    value={newChatName}
+                    onChange={(event) =>
+                      setNewChatName(event.currentTarget.value)
+                    }
                   />
                   <Button type="submit" text="Создать чат" />
                 </form>
@@ -269,11 +277,45 @@ function Chats() {
                     title={chat.title}
                     isChatSelected={chat.id === selectedChatId}
                     unreadCount={chat.unread_count}
+                    chatId={chat.id}
+                    setShouldShowSuccessAlert={setShouldShowSuccessAlert}
+                    setShouldShowErrorAlert={setShouldShowErrorAlert}
                   />
                 );
               })
             )}
           </div>
+
+          {shouldShowSuccessAlert ? (
+            <Alert
+              style={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                zIndex: 10000000,
+              }}
+              severity="success"
+            >
+              Чат был успешно удалён
+            </Alert>
+          ) : (
+            ""
+          )}
+          {shouldShowErrorAlert ? (
+            <Alert
+              style={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                zIndex: 10000000,
+              }}
+              severity="error"
+            >
+              Вы не можете удалить чат, созданный не Вами
+            </Alert>
+          ) : (
+            ""
+          )}
 
           <footer className={styles["Chats-sidebar__footer"]}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label,jsx-a11y/anchor-has-content */}
