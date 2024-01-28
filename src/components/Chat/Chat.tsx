@@ -1,4 +1,7 @@
 import React from "react";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 import styles from "./Chat.css";
 
 interface ChatProps {
@@ -6,11 +9,25 @@ interface ChatProps {
   title: string;
   clickHandler: () => void;
   unreadCount: number;
+  isChatSelected: boolean;
 }
 
-function Chat({ content, title, clickHandler, unreadCount }: ChatProps) {
+function Chat({
+  content,
+  title,
+  clickHandler,
+  unreadCount,
+  isChatSelected,
+}: ChatProps) {
   return (
-    <div className={styles.Chat} onClick={() => clickHandler()}>
+    <div
+      className={
+        isChatSelected
+          ? `${styles.Chat} ${styles.Chat_active}`
+          : `${styles.Chat}`
+      }
+      onClick={() => clickHandler()}
+    >
       <img
         src="../../assets/images/svg/woman-placeholder.svg"
         alt="avatar"
@@ -27,6 +44,24 @@ function Chat({ content, title, clickHandler, unreadCount }: ChatProps) {
           )}
         </div>
       </div>
+      <IconButton
+        aria-label="delete"
+        size="small"
+        style={{
+          color: "red",
+          width: "30px",
+          height: "30px",
+          position: "absolute",
+          top: "5px",
+          right: "25px",
+          zIndex: "1000000000",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <DeleteIcon fontSize="inherit" />
+      </IconButton>
     </div>
   );
 }

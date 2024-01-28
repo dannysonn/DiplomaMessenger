@@ -13,6 +13,7 @@ import ChatFooter from "../../components/ChatFooter/ChatFooter";
 import { useAppDispatch } from "../../redux/hooks";
 import { IPersonState, logout } from "../../redux/slices/userSlice";
 import {
+  ChatType,
   createChat,
   CreateChatData,
   getChats,
@@ -162,7 +163,9 @@ function Chats() {
           ]);
         }
 
-        dispatch(updateLastMessage({ chatId, messageContent }));
+        if (messageContent) {
+          dispatch(updateLastMessage({ chatId, messageContent }));
+        }
       }
     });
 
@@ -173,6 +176,13 @@ function Chats() {
     });
 
     return socket;
+  };
+
+  const getChatLastContent = (chat: ChatType) => {
+    if (chat.last_message) {
+      return chat.last_message.content;
+    }
+    return "Нет сообщений";
   };
 
   return (
@@ -255,14 +265,9 @@ function Chats() {
                       setChatHeaderImg(chat.avatar);
                     }}
                     key={chat.title + chat.id}
-                    content={
-                      chat.last_message
-                        ? chat.last_message.content
-                          ? chat.last_message.content
-                          : "Нет сообщений"
-                        : "Нет сообщений"
-                    }
+                    content={getChatLastContent(chat)}
                     title={chat.title}
+                    isChatSelected={chat.id === selectedChatId}
                     unreadCount={chat.unread_count}
                   />
                 );

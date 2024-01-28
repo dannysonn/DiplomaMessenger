@@ -4,13 +4,12 @@ import styles from "./Message.css";
 import { IChatState, UserInChat } from "../../redux/slices/chatsSlice";
 
 interface MessageProps {
-  src: string;
   text: string;
   modifierCss: string;
   sendById: number;
 }
 
-function Message({ src, text, modifierCss, sendById }: MessageProps) {
+function Message({ text, modifierCss, sendById }: MessageProps) {
   const usersInChat = useSelector(
     (state: IChatState) => state.chatsState.usersInChat,
   );
@@ -21,7 +20,15 @@ function Message({ src, text, modifierCss, sendById }: MessageProps) {
 
   return (
     <div className={`${styles.Message} ${styles[modifierCss]}`}>
-      <img src={src} alt="avatar" className={styles.Message__avatar} />
+      <img
+        src={
+          currentUser?.avatar
+            ? `https://ya-praktikum.tech/api/v2/resources/${currentUser.avatar}`
+            : "https://placehold.co/50x50"
+        }
+        alt="avatar"
+        className={styles.Message__avatar}
+      />
       <div className={styles.Message__main}>
         <h4 className={styles.Message__login}>{currentUser?.login}</h4>
         <p className={styles.Message__text}>{text}</p>
