@@ -25,6 +25,10 @@ class ChatsApi {
   public static addUser(data: any) {
     return this.axios.put(`${ChatsApi.baseUrl}chats/users`, data);
   }
+
+  public static getChatUsers(id: number) {
+    return this.axios.get(`${ChatsApi.baseUrl}chats/${id}/users`);
+  }
 }
 
 export default ChatsApi;

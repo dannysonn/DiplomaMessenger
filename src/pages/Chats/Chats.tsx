@@ -17,6 +17,7 @@ import {
   CreateChatData,
   getChats,
   getChatToken,
+  getChatUsersList,
   IChatState,
   updateLastMessage,
 } from "../../redux/slices/chatsSlice";
@@ -239,6 +240,7 @@ function Chats() {
                       setMessages([]);
                       setSelectedChatId(chat.id);
 
+                      dispatch(getChatUsersList(chat.id));
                       dispatch(getChatToken(chat.id))
                         .unwrap()
                         .then((res) => res)

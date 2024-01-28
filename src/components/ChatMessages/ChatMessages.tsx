@@ -31,6 +31,7 @@ function ChatMessages({ messages, userId }: ChatMessagesProps) {
         if (message.user_id === userId) {
           return (
             <Message
+              sendById={message.user_id}
               key={message.id}
               src="https://placehold.co/50x50"
               text={message.content}
@@ -40,6 +41,7 @@ function ChatMessages({ messages, userId }: ChatMessagesProps) {
         }
         return (
           <Message
+            sendById={message.user_id}
             key={message.id}
             src="https://placehold.co/50x50"
             text={message.content}

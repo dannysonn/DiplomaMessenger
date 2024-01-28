@@ -5,6 +5,16 @@ export type CreateChatData = {
   title: string;
 };
 
+export type UserInChat = {
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  avatar: string;
+  role: string;
+};
+
 export const getChats = createAsyncThunk(
   "chats/getChats",
   async (data, { rejectWithValue }) => {
@@ -61,6 +71,19 @@ export const addUserToChat = createAsyncThunk(
   },
 );
 
+export const getChatUsersList = createAsyncThunk(
+  "chats/getUsers",
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const response = await ChatsApi.getChatUsers(id);
+      return response.data;
+    } catch (e) {
+      console.error("Error in getChatUsersList async thunk:", e);
+      return rejectWithValue(e);
+    }
+  },
+);
+
 export type ChatType = {
   id: number;
   title: string;
@@ -74,32 +97,34 @@ export type ChatType = {
 };
 
 export interface IChatState {
-  chatsState: InitialStateType;
+  chatsState: ChatsStateType;
 }
 
-type InitialStateType = {
+type ChatsStateType = {
   chats: ChatType[];
   isFetching: boolean;
   showChatsError: boolean;
   isEmptyChats: boolean;
   token: null | number;
   isChatsLoaded: boolean;
+  usersInChat: UserInChat[];
 };
 
-const initialState: InitialStateType = {
+const initialState: ChatsStateType = {
   chats: [],
   isFetching: true,
   showChatsError: false,
   isEmptyChats: false,
   token: null,
   isChatsLoaded: false,
+  usersInChat: [],
 };
 
 const chatsSlice = createSlice({
   name: "chatsState",
   initialState,
   reducers: {
-    updateLastMessage(state: InitialStateType, action) {
+    updateLastMessage(state: ChatsStateType, action) {
       const { chatId, messageContent } = action.payload;
       const chatToUpdate = state.chats.find((chat) => chat.id === chatId);
 
@@ -109,7 +134,7 @@ const chatsSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(getChats.pending, (state: InitialStateType) => {
+    builder.addCase(getChats.pending, (state: ChatsStateType) => {
       if (!state.isChatsLoaded) {
         state.isFetching = true;
       }
@@ -117,12 +142,12 @@ const chatsSlice = createSlice({
       state.isChatsLoaded = true;
       state.showChatsError = false;
     });
-    builder.addCase(getChats.rejected, (state: InitialStateType, action) => {
+    builder.addCase(getChats.rejected, (state: ChatsStateType, action) => {
       state.isFetching = false;
       state.showChatsError = true;
       console.error("Rejected action in getChats:", action.payload);
     });
-    builder.addCase(getChats.fulfilled, (state: InitialStateType, action) => {
+    builder.addCase(getChats.fulfilled, (state: ChatsStateType, action) => {
       state.isFetching = false;
       state.showChatsError = false;
       console.log(action.payload);
@@ -130,21 +155,24 @@ const chatsSlice = createSlice({
         state.chats = action.payload;
       }
     });
-    builder.addCase(createChat.pending, (state: InitialStateType) => {
+    builder.addCase(createChat.pending, (state: ChatsStateType) => {
       state.isFetching = true;
     });
-    builder.addCase(createChat.fulfilled, (state: InitialStateType) => {
+    builder.addCase(createChat.fulfilled, (state: ChatsStateType) => {
       state.isFetching = false;
     });
-    builder.addCase(
-      getChatToken.fulfilled,
-      (state: InitialStateType, action) => {
-        state.token = action.payload.token;
-      },
-    );
+    builder.addCase(getChatToken.fulfilled, (state: ChatsStateType, action) => {
+      state.token = action.payload.token;
+    });
     builder.addCase(addUserToChat.fulfilled, () => {
       console.log("пользователь добавлен");
     });
+    builder.addCase(
+      getChatUsersList.fulfilled,
+      (state: ChatsStateType, action) => {
+        state.usersInChat = action.payload;
+      },
+    );
   },
 });
 
