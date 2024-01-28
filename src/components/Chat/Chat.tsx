@@ -1,5 +1,4 @@
 import React from "react";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 import styles from "./Chat.css";
