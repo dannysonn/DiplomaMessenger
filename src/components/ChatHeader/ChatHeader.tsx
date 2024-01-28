@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
 import styles from "./ChatHeader.css";
 import Button from "../Button/Button";
 import { CustomModal } from "../CustomModal/CustomModal";
-import { addUserToChat } from "../../redux/slices/chatsSlice";
+import { addUserToChat, IChatState } from "../../redux/slices/chatsSlice";
 import { useAppDispatch } from "../../redux/hooks";
 
 interface ChatHeaderProps {
@@ -24,6 +25,9 @@ function ChatHeader({
   const [shouldShowSuccessAlert, setShouldShowSuccessAlert] = useState(false);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const usersInChat = useSelector(
+    (state: IChatState) => state.chatsState.usersInChat,
+  );
 
   return (
     <header className={styles["Chat-header"]}>
@@ -33,7 +37,12 @@ function ChatHeader({
           alt="Chat img"
           className={styles["Chat-header__avatar"]}
         />
-        <h2 className={styles["Chat-header__title"]}>{chatHeaderTitle}</h2>
+        <div className={styles["Chat-header__main"]}>
+          <h2 className={styles["Chat-header__title"]}>{chatHeaderTitle}</h2>
+          <button type="button">
+            Пользователей в чате: {usersInChat.length}
+          </button>
+        </div>
       </div>
       <div className={styles["Chat-header__controls"]}>
         <button

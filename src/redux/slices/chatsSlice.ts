@@ -118,7 +118,6 @@ export interface IChatState {
 
 type ChatsStateType = {
   chats: ChatType[];
-  isFetching: boolean;
   showChatsError: boolean;
   isEmptyChats: boolean;
   token: null | number;
@@ -128,7 +127,6 @@ type ChatsStateType = {
 
 const initialState: ChatsStateType = {
   chats: [],
-  isFetching: true,
   showChatsError: false,
   isEmptyChats: false,
   token: null,
@@ -155,15 +153,10 @@ const chatsSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(getChats.pending, (state: ChatsStateType) => {
-      if (!state.isChatsLoaded) {
-        state.isFetching = true;
-      }
-
       state.isChatsLoaded = true;
       state.showChatsError = false;
     });
     builder.addCase(getChats.rejected, (state: ChatsStateType, action) => {
-      state.isFetching = false;
       state.showChatsError = true;
       console.error("Rejected action in getChats:", action.payload);
     });
@@ -173,13 +166,6 @@ const chatsSlice = createSlice({
       if (action.payload) {
         state.chats = action.payload;
       }
-      state.isFetching = false;
-    });
-    builder.addCase(createChat.pending, (state: ChatsStateType) => {
-      state.isFetching = true;
-    });
-    builder.addCase(createChat.fulfilled, (state: ChatsStateType) => {
-      state.isFetching = false;
     });
     builder.addCase(getChatToken.fulfilled, (state: ChatsStateType, action) => {
       state.token = action.payload.token;

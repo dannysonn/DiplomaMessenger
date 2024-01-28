@@ -30,9 +30,6 @@ function Chats() {
   const isAuth = useSelector((state: IPersonState) => state.person.isAuth);
   const userId = useSelector((state: IPersonState) => state.person.user.id);
   const chats = useSelector((state: IChatState) => state.chatsState.chats);
-  const isFetching = useSelector(
-    (state: IChatState) => state.chatsState.isFetching,
-  );
   const [isChatSelected, setIsChatSelected] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -44,6 +41,7 @@ function Chats() {
   const [shouldShowSuccessAlert, setShouldShowSuccessAlert] = useState(false);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState(false);
   const [newChatName, setNewChatName] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     let timeoutId: TimeoutId;
@@ -83,10 +81,15 @@ function Chats() {
   };
 
   const onSubmit = () => {
+    setIsFetching(true);
     dispatch(createChat({ title: newChatName }))
       .unwrap()
       .then(() => {
-        dispatch(getChats());
+        dispatch(getChats())
+          .unwrap()
+          .finally(() => {
+            setIsFetching(false);
+          });
       });
   };
 
