@@ -5,8 +5,13 @@ import { useSelector } from "react-redux";
 import styles from "./ChatHeader.css";
 import Button from "../Button/Button";
 import { CustomModal } from "../CustomModal/CustomModal";
-import { addUserToChat, IChatState } from "../../redux/slices/chatsSlice";
+import {
+  addUserToChat,
+  getChatUsersList,
+  IChatState,
+} from "../../redux/slices/chatsSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { UsersList } from "../UsersList/UsersList";
 
 interface ChatHeaderProps {
   chatHeaderTitle: string;
@@ -28,6 +33,7 @@ function ChatHeader({
   const usersInChat = useSelector(
     (state: IChatState) => state.chatsState.usersInChat,
   );
+  const [isUsersListOpen, setIsUsersListOpen] = useState(false);
 
   return (
     <header className={styles["Chat-header"]}>
@@ -39,10 +45,27 @@ function ChatHeader({
         />
         <div className={styles["Chat-header__main"]}>
           <h2 className={styles["Chat-header__title"]}>{chatHeaderTitle}</h2>
-          <button type="button">
-            Пользователей в чате: {usersInChat.length}
-          </button>
+          {usersInChat.length > 0 ? (
+            <button
+              type="button"
+              className={styles["Chat-header__users"]}
+              onClick={() => setIsUsersListOpen(true)}
+            >
+              Пользователей в чате: {usersInChat.length}
+            </button>
+          ) : (
+            ""
+          )}
         </div>
+        <CustomModal
+          isOpen={isUsersListOpen}
+          handleClose={() => setIsUsersListOpen(false)}
+        >
+          <>
+            <h2 style={{ margin: 0 }}>Список пользователей</h2>
+            <UsersList usersList={usersInChat} selectedChatId={chatId} />
+          </>
+        </CustomModal>
       </div>
       <div className={styles["Chat-header__controls"]}>
         <button
@@ -73,6 +96,7 @@ function ChatHeader({
                       setShouldShowSuccessAlert(false);
                     }, 3000);
                     setAddUserModalOpen(false);
+                    dispatch(getChatUsersList(Number(chatId)));
                   })
                   .catch(() => {
                     setShouldShowErrorAlert(true);

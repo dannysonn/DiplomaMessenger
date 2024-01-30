@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 53px;
+    border-bottom: 1px solid #e2e2e2;
 }
 
 .Chat-header__info {
@@ -43,4 +44,18 @@
 
 .Chat-header__title {
     margin: 0;
+}
+
+.Chat-header__users {
+    color: #3369F3;
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 0;
+}
+
+.Chat-header__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }

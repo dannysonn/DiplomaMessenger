@@ -1,0 +1,11 @@
+.Users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.User {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

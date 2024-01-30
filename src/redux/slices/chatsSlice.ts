@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ChatsApi, {
   AddUserData,
   DeleteChatData,
+  RemoveUserData,
 } from "../../API/ChatsApi/ChatsApi";
 
 export type CreateChatData = {
@@ -100,6 +101,24 @@ export const deleteChat = createAsyncThunk(
   },
 );
 
+export const removeUserFromChat = createAsyncThunk(
+  "chats/removeUserFromChat",
+  async ({ userId, chatId }: RemoveUserData, { rejectWithValue }) => {
+    const data = {
+      users: [userId],
+      chatId,
+    };
+
+    try {
+      await ChatsApi.removeUser(data);
+      return userId;
+    } catch (e) {
+      console.error("Error in removeUserFromChat async thunk:", e);
+      return rejectWithValue(e);
+    }
+  },
+);
+
 export type ChatType = {
   id: number;
   title: string;
@@ -177,6 +196,14 @@ const chatsSlice = createSlice({
       getChatUsersList.fulfilled,
       (state: ChatsStateType, action) => {
         state.usersInChat = action.payload;
+      },
+    );
+    builder.addCase(
+      removeUserFromChat.fulfilled,
+      (state: ChatsStateType, action) => {
+        state.usersInChat = state.usersInChat.filter(
+          (user) => user.id !== Number(action.payload),
+        );
       },
     );
   },

@@ -5,6 +5,11 @@ export interface AddUserData {
   chatId: number | null;
 }
 
+export interface RemoveUserData {
+  userId: number;
+  chatId: number | null;
+}
+
 export interface DeleteChatData {
   chatId: number;
 }
@@ -36,6 +41,10 @@ class ChatsApi {
 
   public static deleteChat(data: DeleteChatData) {
     return this.axios.delete(`${ChatsApi.baseUrl}chats`, { data });
+  }
+
+  public static removeUser(data: any) {
+    return this.axios.delete(`${ChatsApi.baseUrl}chats/users`, { data });
   }
 }
 
