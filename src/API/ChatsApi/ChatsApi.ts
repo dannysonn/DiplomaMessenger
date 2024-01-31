@@ -46,6 +46,10 @@ class ChatsApi {
   public static removeUser(data: any) {
     return this.axios.delete(`${ChatsApi.baseUrl}chats/users`, { data });
   }
+
+  public static sendFile(data: FormData) {
+    return this.axios.post(`${ChatsApi.baseUrl}resources`, data);
+  }
 }
 
 export default ChatsApi;

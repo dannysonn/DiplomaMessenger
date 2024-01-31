@@ -119,6 +119,19 @@ export const removeUserFromChat = createAsyncThunk(
   },
 );
 
+export const sendFileToServer = createAsyncThunk(
+  "chats/sendFileToServer",
+  async (data: FormData, { rejectWithValue }) => {
+    try {
+      const response = await ChatsApi.sendFile(data);
+      return response.data;
+    } catch (e) {
+      console.error("Error in deleteChat async thunk:", e);
+      return rejectWithValue(e);
+    }
+  },
+);
+
 export type ChatType = {
   id: number;
   title: string;
