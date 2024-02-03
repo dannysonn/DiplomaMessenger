@@ -12,18 +12,14 @@ import {
 } from "../../redux/slices/chatsSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { UsersList } from "../UsersList/UsersList";
+import { IPersonState } from "../../redux/slices/userSlice";
 
 interface ChatHeaderProps {
   chatHeaderTitle: string;
-  chatHeaderImg: string | null;
   chatId: number | null;
 }
 
-function ChatHeader({
-  chatHeaderTitle,
-  chatHeaderImg,
-  chatId,
-}: ChatHeaderProps) {
+function ChatHeader({ chatHeaderTitle, chatId }: ChatHeaderProps) {
   const [isAddUserModalOpen, setAddUserModalOpen] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const dispatch = useAppDispatch();
@@ -34,15 +30,13 @@ function ChatHeader({
     (state: IChatState) => state.chatsState.usersInChat,
   );
   const [isUsersListOpen, setIsUsersListOpen] = useState(false);
+  const personId: number | null = useSelector(
+    (state: IPersonState) => state.person.user.id,
+  );
 
   return (
     <header className={styles["Chat-header"]}>
       <div className={styles["Chat-header__info"]}>
-        <img
-          src={chatHeaderImg || "../../assets/images/svg/woman-placeholder.svg"}
-          alt="Chat img"
-          className={styles["Chat-header__avatar"]}
-        />
         <div className={styles["Chat-header__main"]}>
           <h2 className={styles["Chat-header__title"]}>{chatHeaderTitle}</h2>
           {usersInChat.length > 0 ? (
@@ -87,24 +81,32 @@ function ChatHeader({
               className={styles["Modal-add-user__form"]}
               onSubmit={(event) => {
                 event.preventDefault();
-                setIsFetching(true);
-                dispatch(addUserToChat({ userId, chatId }))
-                  .unwrap()
-                  .then(() => {
-                    setShouldShowSuccessAlert(true);
-                    setTimeout(() => {
-                      setShouldShowSuccessAlert(false);
-                    }, 3000);
-                    setAddUserModalOpen(false);
-                    dispatch(getChatUsersList(Number(chatId)));
-                  })
-                  .catch(() => {
-                    setShouldShowErrorAlert(true);
-                    setTimeout(() => {
-                      setShouldShowErrorAlert(false);
-                    }, 3000);
-                  })
-                  .finally(() => setIsFetching(false));
+
+                if (String(personId) === userId) {
+                  setShouldShowErrorAlert(true);
+                  setTimeout(() => {
+                    setShouldShowErrorAlert(false);
+                  }, 3000);
+                } else {
+                  setIsFetching(true);
+                  dispatch(addUserToChat({ userId, chatId }))
+                    .unwrap()
+                    .then(() => {
+                      setShouldShowSuccessAlert(true);
+                      setTimeout(() => {
+                        setShouldShowSuccessAlert(false);
+                      }, 3000);
+                      setAddUserModalOpen(false);
+                      dispatch(getChatUsersList(Number(chatId)));
+                    })
+                    .catch(() => {
+                      setShouldShowErrorAlert(true);
+                      setTimeout(() => {
+                        setShouldShowErrorAlert(false);
+                      }, 3000);
+                    })
+                    .finally(() => setIsFetching(false));
+                }
               }}
             >
               <input
@@ -138,7 +140,7 @@ function ChatHeader({
           style={{ position: "fixed", bottom: 20, right: 20, zIndex: 10000000 }}
           severity="error"
         >
-          Пользователя с таким id не существует
+          Пользователь есть в чате или это Вы
         </Alert>
       ) : (
         ""

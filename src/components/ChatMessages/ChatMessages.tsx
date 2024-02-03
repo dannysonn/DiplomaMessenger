@@ -13,6 +13,10 @@ export interface IMessage {
   time: string;
   user_id: number;
   id: number;
+  file: {
+    path: string;
+    content_type: string;
+  };
 }
 
 function ChatMessages({ messages, userId }: ChatMessagesProps) {
@@ -31,8 +35,15 @@ function ChatMessages({ messages, userId }: ChatMessagesProps) {
         if (message.user_id === userId) {
           return (
             <Message
+              content_type={message.file ? message.file.content_type : ""}
               sendById={message.user_id}
               key={message.id}
+              isFile={message.type === "file"}
+              filePath={
+                message.file
+                  ? `https://ya-praktikum.tech/api/v2/resources${message.file.path}`
+                  : ""
+              }
               text={message.content}
               modifierCss="Message--sent"
             />
@@ -40,6 +51,13 @@ function ChatMessages({ messages, userId }: ChatMessagesProps) {
         }
         return (
           <Message
+            content_type={message.file ? message.file.content_type : ""}
+            isFile={message.type === "file"}
+            filePath={
+              message.file
+                ? `https://ya-praktikum.tech/api/v2/resources${message.file.path}`
+                : ""
+            }
             sendById={message.user_id}
             key={message.id}
             text={message.content}

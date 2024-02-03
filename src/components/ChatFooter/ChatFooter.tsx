@@ -15,10 +15,15 @@ function ChatFooter({ socket }: ChatFooterProps) {
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.currentTarget.files?.[0];
     setFile(selectedFile || null);
+
+    if (selectedFile) {
+      setIsFileUploaded(true);
+    }
   };
 
   const handleIconButtonClick = () => {
@@ -30,6 +35,8 @@ function ChatFooter({ socket }: ChatFooterProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsFileUploaded(false);
+
     if (messageValue.trim() !== "" || file) {
       if (file) {
         const formData = new FormData();
@@ -38,11 +45,11 @@ function ChatFooter({ socket }: ChatFooterProps) {
         dispatch(sendFileToServer(formData))
           .unwrap()
           .then((res) => {
-            alert(res.id);
             alert("Файл успешно отправлен");
+
             socket?.send(
               JSON.stringify({
-                content: "string",
+                content: `${res.id}`,
                 type: "file",
               }),
             );
@@ -67,13 +74,17 @@ function ChatFooter({ socket }: ChatFooterProps) {
 
   return (
     <footer className={styles.ChatFooter} style={{ padding: 15 }}>
-      <form style={{ display: "flex" }} onSubmit={handleSubmit}>
+      <form
+        style={{ display: "flex", alignItems: "center" }}
+        onSubmit={handleSubmit}
+      >
         <IconButton
+          className={isFileUploaded ? styles.FileUploaded : ""}
           type="button"
           color="primary"
           onClick={handleIconButtonClick}
         >
-          <CloudUpload />
+          <CloudUpload style={{ width: 40, height: 40 }} />
         </IconButton>
         <input
           value={messageValue}

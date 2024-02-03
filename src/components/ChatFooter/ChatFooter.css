@@ -28,3 +28,20 @@
     padding: 0;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none'%3E%3Ccircle cx='14' cy='14' r='14' fill='%23476CFF'/%3E%3Crect x='8' y='13.2' width='11' height='1.6' fill='white'/%3E%3Cpath d='M15 9L19 14L15 19' stroke='white' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
 }
+
+.FileUploaded {
+    position: relative;
+}
+
+.FileUploaded:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    background-color: green;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
