@@ -63,10 +63,16 @@ module.exports = (env) => {
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: "asset/resource",
+          generator: {
+            filename: 'assets/images/svg/[hash][ext][query]', // изменение пути для изображений
+          },
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
           type: "asset/resource",
+          generator: {
+            filename: 'assets/fonts/[hash][ext][query]', // изменение пути для шрифтов
+          },
         },
         {
           test: /\.m?js$/,
