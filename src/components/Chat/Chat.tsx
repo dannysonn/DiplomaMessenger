@@ -42,7 +42,7 @@ function Chat({
       onClick={() => clickHandler()}
     >
       <img
-        src="../../assets/images/svg/group.svg"
+        src="/DiplomaMessenger/src/assets/images/svg/group.svg"
         alt="avatar"
         className={styles.Chat__avatar}
       />
