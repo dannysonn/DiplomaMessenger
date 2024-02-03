@@ -63,6 +63,9 @@ module.exports = (env) => {
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: "asset/resource",
+          use: [
+            'file-loader',
+          ],
           generator: {
             filename: 'assets/images/svg/[hash][ext][query]', // изменение пути для изображений
           },
