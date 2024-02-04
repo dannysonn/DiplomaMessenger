@@ -19,9 +19,9 @@ function Login() {
     <main className={`${styles.Main} ${styles.Auth}`}>
       <AuthForm
         isLoginPage
-        title="Login"
-        btnText="Log in"
-        linkText="No account?"
+        title="Логин"
+        btnText="Войти"
+        linkText="Нет аккаунта?"
         linkUrl="/registration"
       />
     </main>

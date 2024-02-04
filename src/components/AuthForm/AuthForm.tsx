@@ -79,7 +79,7 @@ function AuthForm({
               inputName="login"
               id="login"
               placeholder="programmer2000"
-              labelText="Login"
+              labelText="Логин"
               type="text"
               errors={errors}
               onChange={onChange}
@@ -89,7 +89,7 @@ function AuthForm({
               inputName="password"
               id="password"
               placeholder="********"
-              labelText="Password"
+              labelText="Пароль"
               type="password"
               errors={errors}
               onChange={onChange}
@@ -101,7 +101,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="email"
-              labelText="Email"
+              labelText="Почта"
               type="text"
               id="Email"
               placeholder="programmer2000@google.com"
@@ -111,7 +111,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="login"
-              labelText="Login"
+              labelText="Логин"
               type="text"
               id="Login"
               placeholder="programmer2000"
@@ -121,7 +121,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="first_name"
-              labelText="Name"
+              labelText="Имя"
               type="text"
               id="Name"
               placeholder="Elon"
@@ -131,7 +131,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="second_name"
-              labelText="Surname"
+              labelText="Фамилия"
               type="text"
               id="Surname"
               placeholder="Musk"
@@ -141,7 +141,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="phone"
-              labelText="Phone"
+              labelText="Телефон"
               type="text"
               id="Phone"
               placeholder="999-99-999"
@@ -151,7 +151,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="password"
-              labelText="Password"
+              labelText="Пароль"
               type="password"
               id="Password"
               placeholder="********"
@@ -161,7 +161,7 @@ function AuthForm({
               register={register}
               errors={errors}
               inputName="secondPassword"
-              labelText="Password (one more)"
+              labelText="Пароль (ещё раз)"
               type="password"
               id="PasswordSecond"
               placeholder="********"

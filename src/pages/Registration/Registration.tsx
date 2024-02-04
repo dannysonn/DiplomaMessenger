@@ -19,9 +19,9 @@ function Registration() {
     <main className={`${styles.Main} ${styles.Auth}`}>
       <AuthForm
         isLoginPage={false}
-        title="Registration"
-        btnText="Register"
-        linkText="Sign in"
+        title="Регистрация"
+        btnText="Зарегистрироваться"
+        linkText="Вход в аккаунт"
         linkUrl="/"
       />
     </main>
