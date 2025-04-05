@@ -4,12 +4,16 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
   const isDev = env.development ? true : false;
 
   let config = {
+    externals: {
+      "react": "React",
+    },
     context: path.resolve(__dirname, "src"),
     entry: {
       index: "../index.tsx",
@@ -40,8 +44,17 @@ module.exports = (env) => {
     optimization: {
       splitChunks: {
         chunks: "all",
+        maxSize: 244 * 1024,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+        }
       },
       minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()],
+      minimize: true,
     },
     module: {
       rules: [
@@ -119,7 +132,9 @@ module.exports = (env) => {
     config.mode = "production";
   }
 
-  console.log(config);
+  if (env.stats) {
+    config.plugins.push(new BundleAnalyzerPlugin());
+  }
 
   return config;
 };
